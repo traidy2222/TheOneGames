@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8459305bd2507274c893cdfa91eb02bf, type: 3}
+  m_Name: Venus
+  m_EditorClassIdentifier: Assembly-CSharp::Planetary.PlanetDefinition
+  displayName: Venus
+  radiusMetres: 6051800
+  surfaceGravity: 8.87
+  useMagellan: 1
+  elevationDatum: 6051000
+  atmosphereHeight: 100000
+  cloudHeight: 65000
+  hazeColor: {r: 0.48, g: 0.33, b: 0.16, a: 1}
+  ambientDaylight: {r: 0.56, g: 0.43, b: 0.28, a: 1}
+  groundFogDensity: 0.0013
+  atmosphereScaleHeight: 8000
+  cloudBandWidth: 3000
+  cloudHazeColor: {r: 0.7, g: 0.62, b: 0.45, a: 1}
+  terrainMaterial: {fileID: 2100000, guid: 9b6e2943469fb3f4fb040deaab0efdc0, type: 2}
+  cloudMaterial: {fileID: 2100000, guid: 9ddd9d4ea36c7e54a930d1cb22ec4c4e, type: 2}
+  proceduralRelief: 800
+  detailAmplitude: 0.25
+  excavationViewDistance: 4096
+  excavationMeshBudget: 2048
+  seed: 173

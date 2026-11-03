@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8459305bd2507274c893cdfa91eb02bf, type: 3}
+  m_Name: AirlessTestWorld
+  m_EditorClassIdentifier: Assembly-CSharp::Planetary.PlanetDefinition
+  displayName: Procedural airless test world
+  radiusMetres: 1737400
+  surfaceGravity: 1.62
+  useMagellan: 0
+  elevationDatum: 6051000
+  atmosphereHeight: 0
+  cloudHeight: 0
+  hazeColor: {r: 0.48, g: 0.33, b: 0.16, a: 1}
+  ambientDaylight: {r: 0.56, g: 0.43, b: 0.28, a: 1}
+  groundFogDensity: 0.0013
+  atmosphereScaleHeight: 8000
+  cloudBandWidth: 3000
+  terrainMaterial: {fileID: 2100000, guid: 9b6e2943469fb3f4fb040deaab0efdc0, type: 2}
+  cloudMaterial: {fileID: 0}
+  proceduralRelief: 800
+  detailAmplitude: 0.25
+  seed: 173
