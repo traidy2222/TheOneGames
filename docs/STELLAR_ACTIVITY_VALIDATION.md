@@ -1,5 +1,8 @@
 # Stellar activity validation, 2026-11-03
 
+The subsequent [coronal MHD experiment](STELLAR_MHD_VALIDATION.md) replaces the
+prescribed plasma in a resolved region and records the current physics runtime.
+
 Engine `d28397a` and game consumer `a740846` add procedural activity to the separate
 stellar sandbox. The [reference and model notes](https://github.com/traidy2222/TheOne/blob/main/docs/STELLAR_ACTIVITY_REFERENCES.md)
 link the primary NSO, NASA and ESA observations and distinguish rendering
