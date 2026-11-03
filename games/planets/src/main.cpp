@@ -2,6 +2,7 @@
 #include "mesh.hpp"
 #include "renderer.hpp"
 #include <imgui_impl_sdl3.h>
+#include <array>
 #include <chrono>
 #include <iostream>
 #include <memory>
@@ -153,7 +154,8 @@ int main(int argc,char** argv) {
         struct UI{~UI(){ImGui_ImplSDL3_Shutdown();ImGui::DestroyContext();}}uiGuard;
         Renderer renderer;renderer.initialize(window,validate);
         Session s;s.land();if(distanceSmoke){s.position+=s.frame.up*120.0;s.camera.pitch=-.12f;s.dirty=true;}if(startOrbit)s.inspect();one::Material terrain;terrain.name="Planet material";one::Material sky;sky.name="Sky";sky.unlit=true;
-        uint64_t renderedMeshRevision=UINT64_MAX,terrainUploadBytes=0;unsigned reusedTerrainFrames=0;
+        std::array<uint64_t,2> renderedMeshRevisions{UINT64_MAX,UINT64_MAX};
+        uint64_t terrainUploadBytes=0;unsigned reusedTerrainFrames=0;
         bool running=true,forcedStaleBuild=false;int frames=0,lastSmokeAction=-1;auto previous=SDL_GetTicksNS();
         while(running) {
             auto safe=[&](auto&& fn){try{fn();}catch(const std::exception& e){if(smoke)throw;s.status=e.what();}};
@@ -213,13 +215,15 @@ int main(int argc,char** argv) {
             bool capture=smoke&&settled&&(frames==3||frames==8||frames==17);
             if(renderer.renderCached(s.mesh.vertices,draws,s.meshRevision,s.camera,0,capture,false,0,true)) {
                 auto uploaded=renderer.geometryStats().uploadedDynamicBytes;terrainUploadBytes+=uploaded;
+                // Each in-flight slot owns its own cached vertex buffer.
+                auto& renderedMeshRevision=renderedMeshRevisions.at(renderer.frameStats().slot);
                 if(renderedMeshRevision==s.meshRevision) {
                     if(smoke&&uploaded)throw std::runtime_error("Unchanged terrain was reuploaded");
                     ++reusedTerrainFrames;
                 }
                 renderedMeshRevision=s.meshRevision;
                 if(capture)std::filesystem::copy_file("capture.ppm",frames==3?"surface.ppm":frames==8?"excavated.ppm":"interior.ppm",std::filesystem::copy_options::overwrite_existing);
-                if(!smoke||settled)++frames;
+                if(!smoke||(settled&&!renderer.frameStats().pendingDraws))++frames;
             }
             if(smoke&&frames>=20)running=false;
         }
