@@ -122,3 +122,5 @@ theone_copy_shaders(runtime_profile)
 
 add_subdirectory(games/transformers)
 add_subdirectory(games/tornado)
+
+add_subdirectory(games/effects-lab)
