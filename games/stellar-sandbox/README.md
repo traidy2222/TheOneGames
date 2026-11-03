@@ -10,20 +10,28 @@ geometry and observer controls. It uses no directional sun or ambient sky fill.
 
 Right mouse looks; WASD flies; Q/E moves vertically; Shift boosts; R resets the
 camera. The observer is a survey camera, not a simulated relativistic spacecraft.
-The default opens the whole-star EUV diagnostic. **Whole star** frames the plasma;
+The default opens a monochrome EUV inspection of a **2.5D resistive MHD region**.
+**Magnetic region** frames the evolving plasma. **Whole star** frames the plasma;
 **Convection close-up** resolves the surface cells. Use **Star + crescent** or
 **Lit side** to return to the test-body arrangement.
 
-**Observer** selects visible continuum, false-colour EUV or a visible-light
+**Observer** selects visible continuum, colour/monochrome EUV or a visible-light
 coronagraph. These are camera views; EUV colours do not recolour light falling on
 the bodies. Visible continuum is mostly white and its corona is faint. The
 coronagraph masks the disk and raises exposure to reveal scattered light.
 
-**Surface + plasma** enables the optional activity model. Adjust magnetic activity,
-convection contrast and plasma ray steps. Evolution starts at **120x** speed,
-explicitly shown in the panel; **Pause evolution** freezes it and **Replay** resets
-the deterministic clock. Granules have a representative ten-minute timescale at
-1x. The arches are prescribed procedural plasma structures, not an MHD solver.
+**Stress field** adds measured magnetic energy; subsequent expansion, deformation,
+pressure response and gravity are calculated by the MHD solver. **Replay** resets
+the deterministic experiment. The default starts thirty simulated seconds after
+the initial magnetic stress, at a requested **12x** evolution rate. The actual
+clock is CFL limited to four substeps per rendered frame. **Pause evolution**
+freezes it. No prescribed trajectory drives the eruption.
+
+Disable **MHD active region** to inspect the earlier procedural baseline, including
+its prescribed arches. Photospheric convection remains procedural in both modes.
+The MHD region is not full-star 3D physics, and its synthetic EUV response is not a
+calibrated instrument. Thermal conduction, radiative cooling and ionisation are
+not solved. See the engine [physics and limits](https://github.com/traidy2222/TheOne/blob/main/docs/RESISTIVE_MHD.md).
 
 The panel changes distance in AU, star temperature and radius. **1 parsec** moves
 the test region to a stellar distance; the same inverse-square law remains in use.
@@ -55,6 +63,9 @@ and the lit-side view. These six retain activity disabled as lighting regression
 Scenarios 6..10 are whole-star EUV, convection close-up, coronagraph, whole-star
 visible continuum and evolved EUV at 900 simulated seconds. `--time S` overrides
 the stellar clock for deterministic captures; smoke tests freeze time by default.
+Scenarios 11–13 are the stressed MHD region, unstressed control and evolved region
+at 180 simulated seconds. `--time S` pre-evolves these deterministically, up to
+600 seconds. `stellar_corona_check` compares magnetic and control dynamics.
 `--frames N` controls the capture length. A final native
 PPM and per-frame physical flux/visibility/exposure/timing CSV are written to the
 selected output directory. No commercial assets are required.
