@@ -37,6 +37,8 @@ def main():
     parser.add_argument("--light", type=int, default=0, choices=range(4))
     parser.add_argument("--quality", type=int, default=48)
     parser.add_argument("--frames", type=int, default=360)
+    parser.add_argument("--max-speed", type=float, default=12)
+    parser.add_argument("--capture-every", type=int, default=0)
     args = parser.parse_args()
     root = Path(__file__).resolve().parents[3]
     engine = (args.engine or root.parent / "TheOne").resolve()
@@ -52,6 +54,7 @@ def main():
     argv = [str(exe), "--smoke-test", "--validate", "--clean", "--scenario", str(args.scenario),
             "--view", str(args.view), "--light", str(args.light), "--quality", str(args.quality), "--frames", str(args.frames),
             "--output", str(output)]
+    argv.extend(["--max-speed",str(args.max_speed),"--capture-every",str(args.capture_every)])
     env = os.environ.copy()
     candidates = [Path(env["VULKAN_SDK"]) / "Bin"] if env.get("VULKAN_SDK") else []
     for parent in exe.parents:
@@ -77,7 +80,7 @@ def main():
     if (output / "frames.csv").exists():
         with (output / "frames.csv").open() as trace:
             rows = list(csv.DictReader(trace))[30:]
-        for key in ("sim_ms", "light_ms", "ray_ms", "debt", "bytes", "velocity_clamps", "divergence"):
+        for key in ("sim_ms", "light_ms", "ray_ms", "debt", "bytes", "velocity_clamps", "divergence", "max_speed"):
             values = sorted(float(row[key]) for row in rows)
             if values:
                 metrics[key] = {"mean": statistics.mean(values), "p95": values[int((len(values)-1)*.95)],

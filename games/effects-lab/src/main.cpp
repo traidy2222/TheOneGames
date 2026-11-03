@@ -1,15 +1,15 @@
-#include <theone/render/renderer.hpp>
-#include <theone/volumes/volume.hpp>
 #include <SDL3/SDL.h>
-#include <imgui.h>
-#include <imgui_impl_sdl3.h>
 #include <algorithm>
 #include <array>
 #include <chrono>
 #include <filesystem>
 #include <fstream>
+#include <imgui.h>
+#include <imgui_impl_sdl3.h>
 #include <iostream>
 #include <string>
+#include <theone/render/renderer.hpp>
+#include <theone/volumes/volume.hpp>
 using namespace one;
 namespace {
 struct Lab {
@@ -18,6 +18,7 @@ struct Lab {
     std::vector<Draw> draws;
     uint64_t meshRevision = 0;
     Material floor, wall, marker;
+    float maximumSpeed = 12;
     int scenario = 0;
     uint32_t quality = 48;
     float fuel = .18f;
@@ -49,6 +50,7 @@ struct Lab {
         scene.domain.extent = {12, 18, 12};
         scene.domain.resolution = {quality, quality * 3 / 2, quality};
         scene.domain.maximumSubsteps = 24;
+        scene.domain.maximumVelocity = maximumSpeed;
         scene.domain.initialTurbulenceRms = .8f;
         scene.domain.initialTurbulenceScale = 1.5f;
         scene.domain.pressureIterations = 48;
@@ -98,7 +100,8 @@ void lookAt(Camera& camera, glm::vec3 eye, glm::vec3 target) {
 int main(int argc, char** argv) {
     try {
         bool validate = false, smoke = false, clean = false;
-        int scenario = 0, framesLimit = 360, view = 0, lightPreset = 0;
+        int scenario = 0, framesLimit = 360, view = 0, lightPreset = 0, captureEvery = 0;
+        float maximumSpeed = 12;
         std::filesystem::path output = "build/captures";
         uint32_t quality = 48;
         for (int i = 1; i < argc; ++i) {
@@ -115,6 +118,10 @@ int main(int argc, char** argv) {
                 view = std::stoi(argv[++i]);
             else if (a == "--light" && i + 1 < argc)
                 lightPreset = std::stoi(argv[++i]);
+            else if (a == "--capture-every" && i + 1 < argc)
+                captureEvery = std::stoi(argv[++i]);
+            else if (a == "--max-speed" && i + 1 < argc)
+                maximumSpeed = std::stof(argv[++i]);
             else if (a == "--quality" && i + 1 < argc)
                 quality = uint32_t(std::stoi(argv[++i]));
             else if (a == "--frames" && i + 1 < argc)
@@ -124,7 +131,8 @@ int main(int argc, char** argv) {
             else
                 throw std::runtime_error("Unknown effects-lab option: " + a);
         }
-        if (lightPreset < 0 || lightPreset > 3 || view < 0 || view > 3 || framesLimit < 1 || scenario < 0 ||
+        if (!std::isfinite(maximumSpeed) || maximumSpeed < 3 || maximumSpeed > 24 || captureEvery < 0 ||
+            lightPreset < 0 || lightPreset > 3 || view < 0 || view > 3 || framesLimit < 1 || scenario < 0 ||
             scenario > 5 || quality < 16 || quality > 96)
             throw std::runtime_error("Scenario must be 0..5 and quality 16..96");
         std::filesystem::create_directories(output);
@@ -171,6 +179,7 @@ int main(int argc, char** argv) {
         renderer.setLighting(light);
         Lab lab;
         lab.quality = quality;
+        lab.maximumSpeed = maximumSpeed;
         lab.scenario = scenario;
         lab.reset();
         Camera camera;
@@ -184,8 +193,9 @@ int main(int argc, char** argv) {
         int frames = 0;
         uint64_t previous = SDL_GetTicksNS();
         std::ofstream trace(output / "frames.csv");
-        trace << "frame,requested_time,simulated_time,debt,fuel_kg,soot_kg,burned_kg,max_kelvin,sim_ms,light_"
-                 "ms,ray_ms,bytes,velocity_clamps,divergence\n";
+        trace << "frame,requested_time,simulated_time,debt,fuel_kg,soot_kg,burned_"
+                 "kg,max_kelvin,sim_ms,light_"
+                 "ms,ray_ms,bytes,velocity_clamps,divergence,max_speed\n";
         const char* names[] = {"Open fuel explosion", "Wall interaction",    "Ceiling interaction",
                                "Crosswind",           "Two merging sources", "Zero gravity"};
         while (running) {
@@ -217,7 +227,7 @@ int main(int argc, char** argv) {
                 }
             }
             auto now = SDL_GetTicksNS();
-            double dt = smoke ? 1. / 60. : std::min(.066, double(now - previous) / 1e9);
+            double dt = smoke ? 1. / 60. : double(now - previous) / 1e9;
             previous = now;
             if (!smoke && !ImGui::GetIO().WantCaptureKeyboard) {
                 auto keys = SDL_GetKeyboardState(nullptr);
@@ -226,8 +236,8 @@ int main(int argc, char** argv) {
                             right * float(keys[SDL_SCANCODE_D] - keys[SDL_SCANCODE_A]) +
                             glm::vec3(0, 1, 0) * float(keys[SDL_SCANCODE_E] - keys[SDL_SCANCODE_Q]);
                 if (glm::length(move) > .001f)
-                    camera.position +=
-                        glm::normalize(move) * float(dt) * (keys[SDL_SCANCODE_LSHIFT] ? 12.f : 4.f);
+                    camera.position += glm::normalize(move) * float(std::min(dt, .066)) *
+                                       (keys[SDL_SCANCODE_LSHIFT] ? 12.f : 4.f);
             }
             if (!paused)
                 lab.scene.timeSeconds += dt;
@@ -264,15 +274,16 @@ int main(int argc, char** argv) {
                 ImGui::Text("GPU sim %.2f | light %.2f | ray %.2f ms", s.gpuSimulationMs, s.gpuLightingMs,
                             s.gpuRaymarchMs);
                 ImGui::Text("Resources %.1f MiB | clamps %u", s.allocatedBytes / 1048576., s.velocityClamps);
-                ImGui::TextWrapped(
-                    "A low-Mach reactive gas simulation. Pressure shock waves, liquid fuel evaporation and "
-                    "full spectral/global illumination are outside this model.");
+                ImGui::TextWrapped("A low-Mach reactive gas simulation. Pressure shock waves, liquid "
+                                   "fuel evaporation and "
+                                   "full spectral/global illumination are outside this model.");
                 ImGui::End();
             }
             renderer.setVolumeScene(lab.scene);
             ImGui::Render();
-            bool capture = smoke && (frames == 8 || frames == 20 || frames == 60 || frames == 150 ||
-                                     frames == framesLimit - 1);
+            bool capture =
+                smoke && ((captureEvery > 0 && frames % captureEvery == 0) || frames == 8 || frames == 20 ||
+                          frames == 60 || frames == 150 || frames == framesLimit - 1);
             if (renderer.renderCached(lab.vertices, lab.draws, lab.meshRevision, camera,
                                       float(lab.scene.timeSeconds), capture, true)) {
                 auto s = renderer.volumeStats();
@@ -280,7 +291,7 @@ int main(int argc, char** argv) {
                       << s.timeDebtSeconds << ',' << s.fuelKg << ',' << s.sootKg << ',' << s.burnedFuelKg
                       << ',' << s.maximumKelvin << ',' << s.gpuSimulationMs << ',' << s.gpuLightingMs << ','
                       << s.gpuRaymarchMs << ',' << s.allocatedBytes << ',' << s.velocityClamps << ','
-                      << s.maximumDivergenceError << '\n';
+                      << s.maximumDivergenceError << ',' << s.maximumSpeed << '\n';
                 if (capture)
                     std::filesystem::copy_file("capture.ppm",
                                                output / ("frame-" + std::to_string(frames) + ".ppm"),
@@ -296,7 +307,8 @@ int main(int argc, char** argv) {
         summary << "requested_seconds=" << lab.scene.timeSeconds
                 << "\nsimulated_seconds=" << s.simulatedSeconds << "\nfuel_kg=" << s.fuelKg
                 << "\nsoot_kg=" << s.sootKg << "\nburned_kg=" << s.burnedFuelKg
-                << "\nmax_kelvin=" << s.maximumKelvin << "\nclamps=" << s.velocityClamps << "\n";
+                << "\nmax_kelvin=" << s.maximumKelvin << "\nclamps=" << s.velocityClamps
+                << "\nmax_speed=" << s.maximumSpeed << "\n";
         renderer.close();
         if (renderer.errors())
             throw std::runtime_error("Volume lab reported Vulkan validation errors");
