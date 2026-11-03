@@ -27,3 +27,13 @@ for name in ('robots-village.one', 'robots-city.one'):
                 if uri and not uri.startswith('data:'):
                     assert (asset.parent / uri).is_file(), f'Missing glTF resource: {asset}: {uri}'
 print('PASS: engine/game dependency boundary and active relocated scene resources')
+
+# Shared engine implementations must not reappear in a game host.
+for name in ('editor_history.cpp', 'editor_history.hpp', 'scene_asset_reuse.cpp', 'scene_asset_reuse.hpp'):
+    assert not (root / 'shared/import-host' / name).exists(), f'Duplicated engine implementation: {name}'
+for name in ('include/theone/scene/editor_history.hpp', 'include/theone/physics/scene_reuse.hpp'):
+    assert (engine / name).is_file(), f'Missing public engine API: {name}'
+for cmake in [root / 'CMakeLists.txt', *root.glob('games/*/CMakeLists.txt')]:
+    text = cmake.read_text()
+    assert '${THEONE_ROOT}/src' not in text, f'Private engine include path: {cmake}'
+print('PASS: promoted services are engine-owned and game targets use public engine APIs')
