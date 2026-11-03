@@ -39,6 +39,7 @@ Windows x64, Visual Studio 2022 C++, CMake and the Vulkan SDK are required. `THE
 | `games/transformers` | Asset inspection and playable character prototype; local original-game export required |
 | `games/tornado` | Volumetric tornado and debris showcase |
 | `games/effects-lab` | Engine reactive smoke/fire lab, six physical scenarios and repeatable captures |
+| `games/stellar-sandbox` | Finite star, distance-based illumination, eclipses and astronomical observer controls |
 | `UnityProject` | Separate Unity planetary flight, terrain, excavation and lighting experiments |
 | `tools` | Authoring bridges and historical migration utilities |
 | `shared/import-host` | Game-side host shared by Sandbox and Robots, including their gameplay and editor |
