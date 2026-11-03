@@ -33,6 +33,11 @@ comparing timings. `--view 1` uses the opposite direction; `--view 2` starts the
 camera inside the source. Scenario numbers are 0..5 in the UI order above.
 `--view 3` gives a closer view. `--light 0..3` selects the default, opposite sun,
 high sun, or dark illumination reference.
+`--view 4` frames the rising plume through four seconds. `--capture-every 2`
+saves actual frames at a 30 Hz cadence for a fixed 60 Hz requested clock; it
+increases readback cost and should be measured separately from sparse captures.
+`--max-speed` controls the CFL velocity bound (default 12 m/s). Check clamps when
+changing it; a faster run with clipped velocities is not equivalent physics.
 
 The native executable also accepts `--smoke-test --validate --clean --scenario N
 --view N --quality N --frames N --output PATH`. Captures occur at frames 8, 20,

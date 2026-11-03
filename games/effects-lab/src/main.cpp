@@ -79,8 +79,8 @@ struct Lab {
         if (scenario == 5)
             scene.domain.gravity = {0, 0, 0};
         if (scenario == 4) {
-            addFuelExplosion(scene, {-1.2f, 1.5f, 0}, fuel * .55f, 1.0f);
-            addFuelExplosion(scene, {1.2f, 1.5f, 0}, fuel * .55f, 1.0f, .12f);
+            addFuelExplosion(scene, {-.55f, 1.5f, 0}, fuel * .55f, 1.0f);
+            addFuelExplosion(scene, {.55f, 1.5f, 0}, fuel * .55f, 1.0f, .12f);
         } else
             addFuelExplosion(scene, {scenario == 1 ? -1.f : 0.f, 1.5f, 0}, fuel);
         for (size_t i = 0; i < scene.obstacles.size(); ++i)
@@ -132,7 +132,7 @@ int main(int argc, char** argv) {
                 throw std::runtime_error("Unknown effects-lab option: " + a);
         }
         if (!std::isfinite(maximumSpeed) || maximumSpeed < 3 || maximumSpeed > 24 || captureEvery < 0 ||
-            lightPreset < 0 || lightPreset > 3 || view < 0 || view > 3 || framesLimit < 1 || scenario < 0 ||
+            lightPreset < 0 || lightPreset > 3 || view < 0 || view > 4 || framesLimit < 1 || scenario < 0 ||
             scenario > 5 || quality < 16 || quality > 96)
             throw std::runtime_error("Scenario must be 0..5 and quality 16..96");
         std::filesystem::create_directories(output);
@@ -187,8 +187,11 @@ int main(int argc, char** argv) {
                view == 1   ? glm::vec3(-6, 4.5f, -9)
                : view == 2 ? glm::vec3(0, 1.8f, 0)
                : view == 3 ? glm::vec3(3.5f, 3.1f, 5.5f)
+               : view == 4 ? glm::vec3(9, 8, 14)
                            : glm::vec3(6, 4.5f, 9),
-               view == 2 ? glm::vec3(0, 3, -6) : glm::vec3(0, 3, 0));
+               view == 2   ? glm::vec3(0, 3, -6)
+               : view == 4 ? glm::vec3(0, 6, 0)
+                           : glm::vec3(0, 3, 0));
         bool running = true, paused = false;
         int frames = 0;
         uint64_t previous = SDL_GetTicksNS();

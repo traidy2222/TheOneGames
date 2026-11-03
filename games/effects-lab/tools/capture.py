@@ -33,7 +33,7 @@ def main():
     parser.add_argument("--output", type=Path, required=True)
     parser.add_argument("--engine", type=Path)
     parser.add_argument("--scenario", type=int, default=0, choices=range(6))
-    parser.add_argument("--view", type=int, default=0, choices=range(4))
+    parser.add_argument("--view", type=int, default=0, choices=range(5))
     parser.add_argument("--light", type=int, default=0, choices=range(4))
     parser.add_argument("--quality", type=int, default=48)
     parser.add_argument("--frames", type=int, default=360)
