@@ -1,0 +1,174 @@
+{
+  "engine_commit": "d97764332deb3d16b2b51cd0cb7c51d34acf677a",
+  "game_commit": "59252427260471b4ca58ee1c4831f7b46ffe918b",
+  "runtime_source_clean": true,
+  "binary_sha256": {
+    "stellar_sandbox.exe": "08594a7fb3e24410249ec3de468fe59286aa4cf626698dda3c755d85348083a3",
+    "mesh.vert.spv": "af0627e332165bbc724e3649a144eb2f47a3a6211e1abdba80bec780f927ba92",
+    "mesh_hdr.vert.spv": "af0627e332165bbc724e3649a144eb2f47a3a6211e1abdba80bec780f927ba92",
+    "mesh_shadow.vert.spv": "d6897e7dd130da2cbe563363009bec40a6da2f2cfb630e0edc1b031aad509125",
+    "mesh_shadow_mask.vert.spv": "e25ba4092b4094b638a68a27d39a519e2fdc2ee68ad15898547de5837cabd600",
+    "scene.frag.spv": "d44deaa2c805cc3add909a7c1868943fbb93aa9e2e82fe2f87b74fb9684b9d21",
+    "scene.vert.spv": "f769f77be2a417d4fb87fc13a766bdf1189361b6d48b65811af86303b382aa21",
+    "scene_hdr.frag.spv": "a3fe9b339854a2b46259dddb06a648065be4b8e7b9f07e4ebb1351ee98624815",
+    "scene_hdr.vert.spv": "f769f77be2a417d4fb87fc13a766bdf1189361b6d48b65811af86303b382aa21",
+    "shadow.vert.spv": "585b7542279d579152378a1b62a5ad390ac25851d05741c80d34a4290eb3d84a",
+    "shadow_mask.frag.spv": "120a62eaee5523f895ee35ad72b0dc02cef2184e0d33ecb7b4ee8700b7457012",
+    "shadow_mask.vert.spv": "442d9f3fc30f2316d3ceccee076dbad64c0dd2af80978253039345511d5e39d7",
+    "stellar_sky.frag.spv": "592b5614a46af98bb1eae9eea32d8b275aed1ac3bcd3ca2d0caef32d5cf2b826",
+    "stellar_sky.vert.spv": "015ed951dc7306d20267bc008172979c14fb856ac4b48f1921b55ccab27320bd",
+    "volume_fullscreen.vert.spv": "3f5fcac1787300c74a356259179c121e35898643d963fea6cd13ca2a2601d3c6",
+    "volume_light.comp.spv": "e2cb88ed876c9674c585350b26901d6be43c331f87cc33ab488d53489b94d549",
+    "volume_output.frag.spv": "380c170a599fe0c946e10a4509fcff499b47e1124bef7abdd53d85b4e7ffb8fe",
+    "volume_pressure.comp.spv": "68ff41ec470fd49d95fad6477794f4ce107e9cf7b9b9c116cb942cb41b0845f0",
+    "volume_resolve.frag.spv": "99011fe7a93ee0037ae09b9b285b6bd1d7ad43f41f4e0e6cc335c68994bd2196",
+    "volume_sim.comp.spv": "5c44506f48d930aeeed00fd6b918c75e9969ef3326240e8b0fc2482005c12797"
+  },
+  "gpu": "NVIDIA GeForce RTX 3080, 617.42",
+  "runs": [
+    {
+      "scenario": 0,
+      "name": "Near star: 0.05 AU",
+      "argv": [
+        "--smoke-test",
+        "--validate",
+        "--clean",
+        "--scenario",
+        "0",
+        "--output",
+        "build/publication/verification/stellar-release/0"
+      ],
+      "final_measurement": {
+        "frame": "11",
+        "distance_au": "0.05",
+        "flux_w_m2": "544465",
+        "visibility": "1",
+        "exposure": "6.10352e-05",
+        "frame_ms": "538.374"
+      },
+      "exit": 0,
+      "synchronization_validation": true,
+      "ppm_sha256": "7916ab9258fe586095fad17f8cc6b6528c22103fe1e57d1e452ce44b4569baaf"
+    },
+    {
+      "scenario": 1,
+      "name": "One astronomical unit",
+      "argv": [
+        "--smoke-test",
+        "--validate",
+        "--clean",
+        "--scenario",
+        "1",
+        "--output",
+        "build/publication/verification/stellar-release/1"
+      ],
+      "final_measurement": {
+        "frame": "11",
+        "distance_au": "1",
+        "flux_w_m2": "1361.16",
+        "visibility": "1",
+        "exposure": "0.0244141",
+        "frame_ms": "517.09"
+      },
+      "exit": 0,
+      "synchronization_validation": true,
+      "ppm_sha256": "f82302c9c27d5ac70f04be2150a276616379459c48968e4fce06ff566b8fd8ea"
+    },
+    {
+      "scenario": 2,
+      "name": "Total eclipse",
+      "argv": [
+        "--smoke-test",
+        "--validate",
+        "--clean",
+        "--scenario",
+        "2",
+        "--output",
+        "build/publication/verification/stellar-release/2"
+      ],
+      "final_measurement": {
+        "frame": "11",
+        "distance_au": "0.05",
+        "flux_w_m2": "544465",
+        "visibility": "0",
+        "exposure": "6.10352e-05",
+        "frame_ms": "421.305"
+      },
+      "exit": 0,
+      "synchronization_validation": true,
+      "ppm_sha256": "9c5d0b048bddfc1fd95f1a3f5d038bc1948f1dfc766904d242930ba4da635448"
+    },
+    {
+      "scenario": 3,
+      "name": "Partial eclipse",
+      "argv": [
+        "--smoke-test",
+        "--validate",
+        "--clean",
+        "--scenario",
+        "3",
+        "--output",
+        "build/publication/verification/stellar-release/3"
+      ],
+      "final_measurement": {
+        "frame": "11",
+        "distance_au": "0.05",
+        "flux_w_m2": "544465",
+        "visibility": "0.984375",
+        "exposure": "6.10352e-05",
+        "frame_ms": "617.737"
+      },
+      "exit": 0,
+      "synchronization_validation": true,
+      "ppm_sha256": "abe25bd8326f2e3e4cb6b01150fea47bce7e5db79ffb909fac3d11f211aa50fd"
+    },
+    {
+      "scenario": 4,
+      "name": "One parsec",
+      "argv": [
+        "--smoke-test",
+        "--validate",
+        "--clean",
+        "--scenario",
+        "4",
+        "--output",
+        "build/publication/verification/stellar-release/4"
+      ],
+      "final_measurement": {
+        "frame": "11",
+        "distance_au": "206265",
+        "flux_w_m2": "3.19934e-08",
+        "visibility": "1",
+        "exposure": "16",
+        "frame_ms": "520.573"
+      },
+      "exit": 0,
+      "synchronization_validation": true,
+      "ppm_sha256": "847b7f79e03d5c6627ebab623434be40bbabe552c8a3566755c717d621598486"
+    },
+    {
+      "scenario": 5,
+      "name": "Lit test body",
+      "argv": [
+        "--smoke-test",
+        "--validate",
+        "--clean",
+        "--scenario",
+        "5",
+        "--output",
+        "build/publication/verification/stellar-release/5"
+      ],
+      "final_measurement": {
+        "frame": "11",
+        "distance_au": "0.05",
+        "flux_w_m2": "544465",
+        "visibility": "1",
+        "exposure": "6.10352e-05",
+        "frame_ms": "492.113"
+      },
+      "exit": 0,
+      "synchronization_validation": true,
+      "ppm_sha256": "26c76f3d7c87415a2768220e064fef1cdedea50fe9aea6ab718ca3598c0c6804"
+    }
+  ]
+}
