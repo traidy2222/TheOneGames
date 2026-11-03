@@ -1,0 +1,14 @@
+{
+  "mcpServers": {
+    "fab-assets": {
+      "command": "C:\\Program Files\\Python311\\python.exe",
+      "args": [
+        "C:\\Users\\traid\\.codex\\fab-agent-bridge\\app\\bridge.py",
+        "serve"
+      ],
+      "env": {
+        "FAB_BRIDGE_HOME": "C:\\Users\\traid\\.codex\\fab-agent-bridge"
+      }
+    }
+  }
+}
