@@ -1,0 +1,87 @@
+// Shared C++ / GLSL field geometry. World units: metres, seconds, m/s.
+// A prescribed streamfunction, not a Navier-Stokes weather solver.
+vec2 fieldTrack(float time) {
+    return vec2(1.6f, 0.55f) * (time - 18.0f);
+}
+vec2 fieldCenter(float height, float time) {
+    float h = max(height, 0.0f) / 1250.0f;
+    return fieldTrack(time) + vec2(
+        65.0f * h * sin(0.7f + time * 0.026f) + 32.0f * h * h * sin(h * 2.1f + time * 0.019f),
+        45.0f * h + 38.0f * h * h * cos(h * 1.8f - time * 0.022f));
+}
+vec2 fieldSlope(float height, float time) {
+    float h = max(height, 0.0f) / 1250.0f;
+    return vec2(
+        65.0f * sin(0.7f + time * 0.026f) + 64.0f * h * sin(h * 2.1f + time * 0.019f) + 67.2f * h * h * cos(h * 2.1f + time * 0.019f),
+        45.0f + 76.0f * h * cos(h * 1.8f - time * 0.022f) - 68.4f * h * h * sin(h * 1.8f - time * 0.022f)) / 1250.0f;
+}
+float fieldRadius(float height, float radius) {
+    float h = max(height, 0.0f) / 1250.0f;
+    return radius * (0.8f + 0.25f * h + 0.65f * h * h);
+}
+float fieldRadiusSlope(float height, float radius) {
+    return radius * (0.25f + 1.3f * max(height, 0.0f) / 1250.0f) / 1250.0f;
+}
+float fieldStrength(float time) {
+    return 0.96f + 0.04f * sin(time * 0.11f) * sin(time * 0.037f + 1.0f);
+}
+float saturationMixingRatio(float temperature,float pressure) {
+    float celsius=temperature-273.15f;
+    float vapourPressure=611.2f*exp(17.67f*celsius/(celsius+243.5f));
+    return 0.622f*vapourPressure/max(100.0f,pressure-vapourPressure);
+}
+float fieldCondensate(vec3 position,float time,float peak,float radius,float maturity,float humidity) {
+    float z=max(position.y,0.0f), R=fieldRadius(z,radius);
+    vec2 q=vec2(position.x,position.z)-fieldCenter(z,time);
+    float x2=dot(q,q)/(R*R);
+    float ambientT=299.0f-0.0065f*z;
+    float ambientP=97000.0f*exp(-z/8500.0f);
+    float rho=ambientP/(287.05f*ambientT);
+    float V=peak*clamp(maturity,0.0f,1.0f)*fieldStrength(time);
+    // Reduced fit to radial gradient-wind pressure balance, not a solved pressure field.
+    float deficit=1.702f*rho*V*V/(1.0f+1.742f*x2);
+    float pressure=max(ambientP*0.65f,ambientP-deficit);
+    float dryT=ambientT*pow(pressure/ambientP,0.2854f);
+    float rh=clamp(humidity+(0.97f-humidity)*clamp(z/2200.0f,0.0f,1.0f),0.1f,0.99f);
+    float vapour=rh*saturationMixingRatio(ambientT,ambientP);
+    float saturated=saturationMixingRatio(dryT,pressure);
+    // First-order latent-heat feedback prevents treating dry cooling as all condensate.
+    float feedback=1.0f+2450.0f*saturated*5420.0f/(dryT*dryT);
+    return rho*max(0.0f,vapour-saturated)/feedback;
+}
+vec3 fieldEddies(vec3 position,float time,float strength,float radius) {
+    // Curl of two localized vector potentials: divergence-free ground eddies.
+    // Both potentials vanish on the ground, so vertical velocity remains zero there.
+    vec2 q=vec2(position.x,position.z)-fieldTrack(time);
+    float z=max(position.y,0.0f), width=radius*2.5f;
+    float envelope=exp(-dot(q,q)/(width*width));
+    float decay=exp(-z/45.0f), vertical=z*decay, derivative=(1.0f-z/45.0f)*decay;
+    float px=q.x*0.09f-time*1.1f, pz=q.y*0.073f+time*0.83f;
+    float amp=strength*0.14f;
+    float ux=amp*derivative*envelope*cos(px);
+    float uz=-amp*0.7f*derivative*envelope*sin(pz);
+    float up=amp*vertical*envelope*(
+        0.7f*(0.073f*cos(pz)-2.0f*q.y/(width*width)*sin(pz))+
+        0.09f*sin(px)+2.0f*q.x/(width*width)*cos(px));
+    return vec3(ux,up,uz);
+}
+vec3 fieldWind(vec3 position, float time, float peak, float radius, float maturity) {
+    float z = max(position.y, 0.0f);
+    vec2 q = vec2(position.x, position.z) - fieldCenter(z, time);
+    float r = length(q), R = max(1.0f, fieldRadius(z, radius));
+    float x = r / R, x2 = x * x;
+    vec2 radial = q / max(r, 0.001f);
+    float V = peak * clamp(maturity, 0.0f, 1.0f) * fieldStrength(time);
+    float swirl = V * (0.32f + 0.68f * (1.0f - exp(-z / 16.0f))) *
+                  (1.0f - exp(-1.2564312f * x2)) / max(0.001f, 0.7153319f * x);
+    // psi = 0.5 W S(z) R(z)^2 (1-exp(-r^2/R^2)).
+    // Analytic derivatives couple inflow to ascent and preserve zero divergence.
+    float S = 1.0f - exp(-z / 90.0f), Sd = exp(-z / 90.0f) / 90.0f;
+    float e = exp(-x2), W = V * 0.48f;
+    float up = W * S * e;
+    float inflow = -0.5f * W / max(r, 0.001f) *
+        (Sd * R * R * (1.0f - e) + 2.0f * S * R * fieldRadiusSlope(z, radius) * (1.0f - e * (1.0f + x2)));
+    vec2 horizontal = radial * inflow + vec2(-radial.y, radial.x) * swirl + fieldSlope(z, time) * up;
+    horizontal += vec2(1.6f, 0.55f) * clamp(maturity, 0.0f, 1.0f);
+    return vec3(horizontal.x, up, horizontal.y)+fieldEddies(position,time,V,radius);
+}
