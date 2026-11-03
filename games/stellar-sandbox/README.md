@@ -59,4 +59,8 @@ the stellar clock for deterministic captures; smoke tests freeze time by default
 PPM and per-frame physical flux/visibility/exposure/timing CSV are written to the
 selected output directory. No commercial assets are required.
 
+`--ray-steps N` accepts 16–192 steps for detail comparisons; the panel exposes
+16–128. See the [activity captures and timings](../../docs/STELLAR_ACTIVITY_VALIDATION.md)
+for the measured default and remaining sampling limitations.
+
 See the engine [model and limits](https://github.com/traidy2222/TheOne/blob/main/docs/STELLAR_LIGHTING.md).

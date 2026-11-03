@@ -1,0 +1,452 @@
+{
+  "date": "2026-11-03",
+  "engine_commit": "d28397a71f8cd10c9eae86ca14c08171ca1a0c8a",
+  "game_consumer_commit": "a7408463d3e5decb07bdcc325add385e284b56fb",
+  "resolution": [
+    1280,
+    720
+  ],
+  "gpu": "NVIDIA GeForce RTX 3080",
+  "driver": "617.42",
+  "executable_sha256": "932982ee15c23c76f630c38a16905b7905d7c2108d9cbb821e65ab0d0ab58f8b",
+  "shader_sha256": {
+    "mesh.vert.spv": "af0627e332165bbc724e3649a144eb2f47a3a6211e1abdba80bec780f927ba92",
+    "mesh_hdr.vert.spv": "af0627e332165bbc724e3649a144eb2f47a3a6211e1abdba80bec780f927ba92",
+    "mesh_shadow.vert.spv": "d6897e7dd130da2cbe563363009bec40a6da2f2cfb630e0edc1b031aad509125",
+    "mesh_shadow_mask.vert.spv": "e25ba4092b4094b638a68a27d39a519e2fdc2ee68ad15898547de5837cabd600",
+    "scene.frag.spv": "d44deaa2c805cc3add909a7c1868943fbb93aa9e2e82fe2f87b74fb9684b9d21",
+    "scene.vert.spv": "f769f77be2a417d4fb87fc13a766bdf1189361b6d48b65811af86303b382aa21",
+    "scene_hdr.frag.spv": "93f624de156cb5f261ef4f491c118efcea7001aa030f5fe666a915aa99b50381",
+    "scene_hdr.vert.spv": "f769f77be2a417d4fb87fc13a766bdf1189361b6d48b65811af86303b382aa21",
+    "shadow.vert.spv": "585b7542279d579152378a1b62a5ad390ac25851d05741c80d34a4290eb3d84a",
+    "shadow_mask.frag.spv": "120a62eaee5523f895ee35ad72b0dc02cef2184e0d33ecb7b4ee8700b7457012",
+    "shadow_mask.vert.spv": "442d9f3fc30f2316d3ceccee076dbad64c0dd2af80978253039345511d5e39d7",
+    "stellar_sky.frag.spv": "789fff3e0971d2f7dd0785925987d2a61e561774d1fd6afdbc1ce067c7906c27",
+    "stellar_sky.vert.spv": "015ed951dc7306d20267bc008172979c14fb856ac4b48f1921b55ccab27320bd",
+    "volume_fullscreen.vert.spv": "3f5fcac1787300c74a356259179c121e35898643d963fea6cd13ca2a2601d3c6",
+    "volume_light.comp.spv": "49d59f564bd4e887cd29f125f93a788e9e10d4efa10021faa3a939ba1c437152",
+    "volume_output.frag.spv": "8ecca25ffe9f458f95b030e2da46d9ea8ba7ece205b94666ce488dec7f5469de",
+    "volume_pressure.comp.spv": "ded164fde6aad673d7218c07fd0cd16441e751aca238dd0e8d6f6b4e4330e77a",
+    "volume_resolve.frag.spv": "cf3b8f5b25f12458cf3a45044bb7d9aeb11cb7aa850139de5acb57d46671b528",
+    "volume_sim.comp.spv": "fb4aff752f40a792f4f00d60999198fee4231814f17e8853d73ec613b369aaf1"
+  },
+  "scenarios": [
+    {
+      "scenario": 0,
+      "arguments": [
+        "--smoke-test",
+        "--validate",
+        "--clean",
+        "--scenario",
+        "0",
+        "--frames",
+        "12",
+        "--output",
+        "s0"
+      ],
+      "ppm_sha256": "85823944df46b36a2bbd30a0549f14ce2e0a092940e05c94b3f3360dbc6f22eb",
+      "final_metrics": {
+        "frame": "11",
+        "distance_au": "0.05",
+        "flux_w_m2": "544465",
+        "visibility": "1",
+        "exposure": "6.10352e-05",
+        "stellar_time_s": "0",
+        "frame_ms": "419.079",
+        "gpu_ms": "0.266144"
+      },
+      "validation_pass": true
+    },
+    {
+      "scenario": 1,
+      "arguments": [
+        "--smoke-test",
+        "--validate",
+        "--clean",
+        "--scenario",
+        "1",
+        "--frames",
+        "12",
+        "--output",
+        "s1"
+      ],
+      "ppm_sha256": "f0ce009455e24ccbc4d4de04c54de7ea51ac5899f0d57674652d3f7016888b30",
+      "final_metrics": {
+        "frame": "11",
+        "distance_au": "1",
+        "flux_w_m2": "1361.16",
+        "visibility": "1",
+        "exposure": "0.0244141",
+        "stellar_time_s": "0",
+        "frame_ms": "586.725",
+        "gpu_ms": "0.263744"
+      },
+      "validation_pass": true
+    },
+    {
+      "scenario": 2,
+      "arguments": [
+        "--smoke-test",
+        "--validate",
+        "--clean",
+        "--scenario",
+        "2",
+        "--frames",
+        "12",
+        "--output",
+        "s2"
+      ],
+      "ppm_sha256": "9c5d0b048bddfc1fd95f1a3f5d038bc1948f1dfc766904d242930ba4da635448",
+      "final_metrics": {
+        "frame": "11",
+        "distance_au": "0.05",
+        "flux_w_m2": "544465",
+        "visibility": "0",
+        "exposure": "6.10352e-05",
+        "stellar_time_s": "0",
+        "frame_ms": "451.79",
+        "gpu_ms": "0.303072"
+      },
+      "validation_pass": true
+    },
+    {
+      "scenario": 3,
+      "arguments": [
+        "--smoke-test",
+        "--validate",
+        "--clean",
+        "--scenario",
+        "3",
+        "--frames",
+        "12",
+        "--output",
+        "s3"
+      ],
+      "ppm_sha256": "abe25bd8326f2e3e4cb6b01150fea47bce7e5db79ffb909fac3d11f211aa50fd",
+      "final_metrics": {
+        "frame": "11",
+        "distance_au": "0.05",
+        "flux_w_m2": "544465",
+        "visibility": "0.984375",
+        "exposure": "6.10352e-05",
+        "stellar_time_s": "0",
+        "frame_ms": "412.857",
+        "gpu_ms": "0.300064"
+      },
+      "validation_pass": true
+    },
+    {
+      "scenario": 4,
+      "arguments": [
+        "--smoke-test",
+        "--validate",
+        "--clean",
+        "--scenario",
+        "4",
+        "--frames",
+        "12",
+        "--output",
+        "s4"
+      ],
+      "ppm_sha256": "847b7f79e03d5c6627ebab623434be40bbabe552c8a3566755c717d621598486",
+      "final_metrics": {
+        "frame": "11",
+        "distance_au": "206265",
+        "flux_w_m2": "3.19934e-08",
+        "visibility": "1",
+        "exposure": "16",
+        "stellar_time_s": "0",
+        "frame_ms": "457.645",
+        "gpu_ms": "0.291136"
+      },
+      "validation_pass": true
+    },
+    {
+      "scenario": 5,
+      "arguments": [
+        "--smoke-test",
+        "--validate",
+        "--clean",
+        "--scenario",
+        "5",
+        "--frames",
+        "12",
+        "--output",
+        "s5"
+      ],
+      "ppm_sha256": "26c76f3d7c87415a2768220e064fef1cdedea50fe9aea6ab718ca3598c0c6804",
+      "final_metrics": {
+        "frame": "11",
+        "distance_au": "0.05",
+        "flux_w_m2": "544465",
+        "visibility": "1",
+        "exposure": "6.10352e-05",
+        "stellar_time_s": "0",
+        "frame_ms": "425.256",
+        "gpu_ms": "0.294112"
+      },
+      "validation_pass": true
+    },
+    {
+      "scenario": 6,
+      "arguments": [
+        "--smoke-test",
+        "--validate",
+        "--clean",
+        "--scenario",
+        "6",
+        "--frames",
+        "12",
+        "--output",
+        "s6"
+      ],
+      "ppm_sha256": "ba35048af7787f4961533e94a0243fd85adf0826320b4b803e459eed0896c0e6",
+      "final_metrics": {
+        "frame": "11",
+        "distance_au": "0.05",
+        "flux_w_m2": "544465",
+        "visibility": "1",
+        "exposure": "1.52588e-05",
+        "stellar_time_s": "0",
+        "frame_ms": "545.067",
+        "gpu_ms": "6.21078"
+      },
+      "validation_pass": true,
+      "image": "docs/stellar-activity/euv.png",
+      "png_sha256": "3aa5b4040b70b3b3cb6c12b18e431809975f58b387b942d7224a002b00114ede"
+    },
+    {
+      "scenario": 7,
+      "arguments": [
+        "--smoke-test",
+        "--validate",
+        "--clean",
+        "--scenario",
+        "7",
+        "--frames",
+        "12",
+        "--output",
+        "s7"
+      ],
+      "ppm_sha256": "10453a94212c000590a2507850d169af7b1c38bbf01b310752ad6f3429fe9583",
+      "final_metrics": {
+        "frame": "11",
+        "distance_au": "0.05",
+        "flux_w_m2": "544465",
+        "visibility": "1",
+        "exposure": "1.19209e-07",
+        "stellar_time_s": "0",
+        "frame_ms": "566.058",
+        "gpu_ms": "4.80298"
+      },
+      "validation_pass": true,
+      "image": "docs/stellar-activity/granulation.png",
+      "png_sha256": "d468d4a435d2c85c21bdb477cfe91c8063a04ab4ab7697c19de42f15e417b0e0"
+    },
+    {
+      "scenario": 8,
+      "arguments": [
+        "--smoke-test",
+        "--validate",
+        "--clean",
+        "--scenario",
+        "8",
+        "--frames",
+        "12",
+        "--output",
+        "s8"
+      ],
+      "ppm_sha256": "6928f8bb5cc32c2366890ac78bf2e46f5b3d7e6a7178e3cfcabd089b209fdc39",
+      "final_metrics": {
+        "frame": "11",
+        "distance_au": "0.05",
+        "flux_w_m2": "544465",
+        "visibility": "1",
+        "exposure": "0.0625",
+        "stellar_time_s": "0",
+        "frame_ms": "488.638",
+        "gpu_ms": "5.51328"
+      },
+      "validation_pass": true,
+      "image": "docs/stellar-activity/coronagraph.png",
+      "png_sha256": "87b9c8f4b8484bb9848a3edbacbf66dd1a15d20150c6ddf8e7f4e9178477ff7e"
+    },
+    {
+      "scenario": 9,
+      "arguments": [
+        "--smoke-test",
+        "--validate",
+        "--clean",
+        "--scenario",
+        "9",
+        "--frames",
+        "12",
+        "--output",
+        "s9"
+      ],
+      "ppm_sha256": "bb89f49882e274d19a7f4b0ce08d3402752a922acbf4f97758f8f108cf2dc722",
+      "final_metrics": {
+        "frame": "11",
+        "distance_au": "0.05",
+        "flux_w_m2": "544465",
+        "visibility": "1",
+        "exposure": "1.19209e-07",
+        "stellar_time_s": "0",
+        "frame_ms": "520.643",
+        "gpu_ms": "6.34976"
+      },
+      "validation_pass": true,
+      "image": "docs/stellar-activity/visible.png",
+      "png_sha256": "06540ef969df9aec94ad4f0406e5797f38d8c80374a7fee5dc6a3e4eecf80fb5"
+    },
+    {
+      "scenario": 10,
+      "arguments": [
+        "--smoke-test",
+        "--validate",
+        "--clean",
+        "--scenario",
+        "10",
+        "--frames",
+        "12",
+        "--output",
+        "s10"
+      ],
+      "ppm_sha256": "c5681605ead9c2befee0ca75b2f57fd5392fcf241562afb764fcc3abf2f7ece4",
+      "final_metrics": {
+        "frame": "11",
+        "distance_au": "0.05",
+        "flux_w_m2": "544465",
+        "visibility": "1",
+        "exposure": "1.52588e-05",
+        "stellar_time_s": "900",
+        "frame_ms": "548.035",
+        "gpu_ms": "6.46211"
+      },
+      "validation_pass": true,
+      "image": "docs/stellar-activity/evolved.png",
+      "png_sha256": "e9c435445602921cd8f3fd03792f55fcb66a39251e87e5e1d87e5654aff1106e"
+    }
+  ],
+  "detail_profiles": [
+    {
+      "steps": 32,
+      "arguments": [
+        "--smoke-test",
+        "--clean",
+        "--scenario",
+        "6",
+        "--ray-steps",
+        "32",
+        "--frames",
+        "140",
+        "--output",
+        "perf32"
+      ],
+      "samples": 119,
+      "gpu_median_ms": 3.47875,
+      "gpu_p95_ms": 3.616557,
+      "cpu_frame_median_ms": 3.615,
+      "capture_sha256": "55c4be88b5136488e6a467443b19d2114b42e6d2d777791a71b961a1a1be1cf6"
+    },
+    {
+      "steps": 64,
+      "arguments": [
+        "--smoke-test",
+        "--clean",
+        "--scenario",
+        "6",
+        "--ray-steps",
+        "64",
+        "--frames",
+        "140",
+        "--output",
+        "perf64"
+      ],
+      "samples": 119,
+      "gpu_median_ms": 6.54528,
+      "gpu_p95_ms": 6.954842,
+      "cpu_frame_median_ms": 6.7299,
+      "capture_sha256": "ba35048af7787f4961533e94a0243fd85adf0826320b4b803e459eed0896c0e6"
+    },
+    {
+      "steps": 128,
+      "arguments": [
+        "--smoke-test",
+        "--clean",
+        "--scenario",
+        "6",
+        "--ray-steps",
+        "128",
+        "--frames",
+        "140",
+        "--output",
+        "perf128"
+      ],
+      "samples": 119,
+      "gpu_median_ms": 12.4894,
+      "gpu_p95_ms": 12.95312,
+      "cpu_frame_median_ms": 12.5137,
+      "capture_sha256": "1cd21492b1ece622d7b9e958cb6e6cdd599cb6babe0774f0ae977760999e1a93"
+    },
+    {
+      "steps": 192,
+      "arguments": [
+        "--smoke-test",
+        "--clean",
+        "--scenario",
+        "6",
+        "--ray-steps",
+        "192",
+        "--frames",
+        "140",
+        "--output",
+        "perf192"
+      ],
+      "samples": 119,
+      "gpu_median_ms": 18.0618,
+      "gpu_p95_ms": 19.05857,
+      "cpu_frame_median_ms": 18.4135,
+      "capture_sha256": "73ee276066b159d16a196a97b66197ff8ac1a6a3bd9bbc28721193b8422bff7e"
+    }
+  ],
+  "quality_64_vs_192": {
+    "mask": "192-step RGB maximum >8",
+    "mean_absolute_rgb_8bit": 0.5480145563914165,
+    "p95_absolute_rgb_8bit": 2.0,
+    "max_absolute_rgb_8bit": 154.0,
+    "note": "Some narrow prominence pixels differ strongly; no claim of full ray convergence."
+  },
+  "deterministic_capture_match": true,
+  "panel": {
+    "arguments": [
+      "--smoke-test",
+      "--validate",
+      "--scenario",
+      "6",
+      "--frames",
+      "12",
+      "--output",
+      "panel"
+    ],
+    "png_sha256": "f1ec1c50d67501ad202d717ab28fbfc1c6d0b73a04e06c0494999236636752e7",
+    "validation_pass": true
+  },
+  "near_star_bright_pixels": 21501,
+  "artifacts_sha256": {
+    "comparison.png": "a701ecc34cb81aca2c0fa9ae07c23fe65d9b2eb51533e86dc8f54a7f76648a70",
+    "coronagraph.png": "87b9c8f4b8484bb9848a3edbacbf66dd1a15d20150c6ddf8e7f4e9178477ff7e",
+    "euv.png": "3aa5b4040b70b3b3cb6c12b18e431809975f58b387b942d7224a002b00114ede",
+    "evolved.png": "e9c435445602921cd8f3fd03792f55fcb66a39251e87e5e1d87e5654aff1106e",
+    "granulation.png": "d468d4a435d2c85c21bdb477cfe91c8063a04ab4ab7697c19de42f15e417b0e0",
+    "panel.png": "f1ec1c50d67501ad202d717ab28fbfc1c6d0b73a04e06c0494999236636752e7",
+    "visible.png": "06540ef969df9aec94ad4f0406e5797f38d8c80374a7fee5dc6a3e4eecf80fb5"
+  },
+  "focused_checks": {
+    "engine_stellar_reference": "passed",
+    "engine_stellar_gpu": "passed",
+    "engine_module_boundaries": "passed",
+    "engine_volume_gpu": "passed",
+    "game_engine_separation": "passed"
+  }
+}

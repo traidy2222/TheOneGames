@@ -1,5 +1,9 @@
 # Stellar sandbox validation, 2026-11-03
 
+This records the original lighting baseline. The subsequent
+[stellar activity validation](STELLAR_ACTIVITY_VALIDATION.md) covers the current
+procedural surface, corona and observer modes.
+
 The checked runtime is engine `d977643` and game consumer `5925242`. Subsequent
 evidence and panel-layout changes leave the captured geometry and lighting unchanged. Both projects remain separate.
 
