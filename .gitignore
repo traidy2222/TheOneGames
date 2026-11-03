@@ -1,0 +1,8 @@
+/build/
+/migration-backup/
+**/build/
+**/saves/
+**/__pycache__/
+capture.ppm
+imgui.ini
+*.log
