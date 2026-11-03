@@ -128,7 +128,7 @@ int main(int argc, char** argv) {
         bool activity = scenario >= 6, paused = false;
         int view = mhd ? 3 : (scenario == 6 || scenario == 10) ? 1 : scenario == 8 ? 2 : 0;
         int inspection = mhd ? 3 : scenario >= 6 ? (scenario == 7 ? 2 : 1) : 0;
-        float timeScale = mhd ? 12.f : 120.f, magneticStrength = .8f, granuleContrast = .05f;
+        float timeScale = mhd ? 6.f : 120.f, magneticStrength = .8f, granuleContrast = .05f;
         int raySteps = requestedSteps;
         double simulationTime = corona               ? corona->timeSeconds()
                                 : requestedTime >= 0 ? requestedTime

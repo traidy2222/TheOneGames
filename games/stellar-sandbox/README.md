@@ -23,7 +23,7 @@ coronagraph masks the disk and raises exposure to reveal scattered light.
 **Stress field** adds measured magnetic energy; subsequent expansion, deformation,
 pressure response and gravity are calculated by the MHD solver. **Replay** resets
 the deterministic experiment. The default starts thirty simulated seconds after
-the initial magnetic stress, at a requested **12x** evolution rate. The actual
+the initial magnetic stress, at a requested **6x** evolution rate. The actual
 clock is CFL limited to four substeps per rendered frame. **Pause evolution**
 freezes it. No prescribed trajectory drives the eruption.
 
