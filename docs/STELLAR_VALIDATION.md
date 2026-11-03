@@ -1,7 +1,7 @@
 # Stellar sandbox validation, 2026-11-03
 
 The checked runtime is engine `d977643` and game consumer `5925242`. Subsequent
-evidence commits do not change runtime code. Both projects remain separate.
+evidence and panel-layout changes leave the captured geometry and lighting unchanged. Both projects remain separate.
 
 ![Actual stellar sandbox captures](stellar/comparison.png)
 

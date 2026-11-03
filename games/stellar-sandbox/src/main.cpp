@@ -187,7 +187,8 @@ int main(int argc, char** argv) {
             ImGui::NewFrame();
             bool faceStar = false;
             if (!clean) {
-                ImGui::SetNextWindowPos({16, 16}, ImGuiCond_FirstUseEver);
+                ImGui::SetNextWindowPos({std::max(16.f, ImGui::GetIO().DisplaySize.x - 381.f), 16},
+                                        ImGuiCond_FirstUseEver);
                 ImGui::SetNextWindowSize({365, 0}, ImGuiCond_FirstUseEver);
                 ImGui::Begin("Stellar sandbox");
                 ImGui::TextUnformatted("Finite star / dark space");
