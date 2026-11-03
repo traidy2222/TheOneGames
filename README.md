@@ -1,4 +1,19 @@
-# TheOne games
+# TheOneGames
+
+Public game and prototype collection consuming the separate [TheOne engine](https://github.com/traidy2222/TheOne).
+
+```powershell
+git clone https://github.com/traidy2222/TheOne.git
+git clone https://github.com/traidy2222/TheOneGames.git
+cd TheOne
+git checkout (Get-Content ../TheOneGames/engine-revision.txt -Raw).Trim()
+cd ../TheOneGames
+```
+
+`engine-revision.txt` records the engine commit used for the publication checks.
+[Publication validation](docs/PUBLICATION_VALIDATION.md) records their scope;
+[engine ownership review](https://github.com/traidy2222/TheOne/blob/main/docs/ENGINE_GAME_BOUNDARY_REVIEW.md)
+explains what was promoted into the engine and what stays here.
 
 Independent game projects consuming the external **TheOne** engine. This repository owns game executables, gameplay, game UI, assets, content conversion, saves and game tests. The engine checkout has no dependency on this repository.
 
@@ -7,21 +22,48 @@ Independent game projects consuming the external **TheOne** engine. This reposit
 .\run.ps1 -Game Sandbox
 .\run.ps1 -Game Robots
 .\games\robots\Play-Robots.ps1 -Level City
-.\run.ps1 -Test
+cmake --build build --config Release --target game_integration_tests
+ctest --test-dir build -C Release -R '^game_integration$' --output-on-failure
 ```
 
-Windows x64, Visual Studio 2022 C++, CMake and the Vulkan SDK are required. `THEONE_ROOT` defaults to the sibling `../TheOne`; override it with `cmake -S . -B build -DTHEONE_ROOT=...`. Games build engine libraries in their own build directory. Existing pinned dependency source downloads can be reused from the engine cache; its compiled binaries are not required. Game executables are normally under `build/bin/<game>/Release/` with shaders beside each executable. Planets can use a separate output directory through `PLANET_RUNTIME_DIRECTORY`; the launcher reads its generated executable path from `build/launch/planets-Release.txt`. The current updated build is under `build/bin/planets-distance/Release/`, allowing the previous open build to remain untouched.
+Windows x64, Visual Studio 2022 C++, CMake and the Vulkan SDK are required. `THEONE_ROOT` defaults to the sibling `../TheOne`; override it with `cmake -S . -B build -DTHEONE_ROOT=...`. Games build engine libraries in their own build directory. Existing pinned dependency source downloads can be reused from the engine cache; its compiled binaries are not required. Game executables are normally under `build/bin/<game>/Release/` with shaders beside each executable. Planets can use a separate output directory through `PLANET_RUNTIME_DIRECTORY`; the launcher reads its generated executable path from `build/launch/planets-Release.txt`. Local build-directory overrides are not required for a fresh clone.
 
 | Location | Ownership |
 | --- | --- |
 | `games/planets` | Kestrel planet exploration / excavation prototype |
 | `games/sandbox` | Original import sandbox, editor UI and sample assets |
 | `games/robots` | Existing Robots exploration port, tools, research, extracted local content |
+| `games/transformers` | Asset inspection and playable character prototype; local original-game export required |
+| `games/tornado` | Volumetric tornado and debris showcase |
+| `UnityProject` | Separate Unity planetary flight, terrain, excavation and lighting experiments |
+| `tools` | Authoring bridges and historical migration utilities |
 | `shared/import-host` | Game-side host shared by Sandbox and Robots, including their gameplay and editor |
 | `tests` | Cross-game integration and separation regression checks |
 | `../TheOne` | Renderer, content, physics, input/effects primitives, generic import tools |
 
 Each launcher sets its game's working directory so saves do not collide. Tests have separate working directories. The extracted Robots data stays ignored and local. Research documentation describes its fidelity limits; relocation does not establish a complete original-game port.
+
+## Public source and local content
+
+The repository includes native source, original generated sandbox fixtures, Unity
+source/settings, attributed terrain textures and measured relief data. Build
+outputs, Unity Library/Logs/UserSettings, saves, migration backups and extracted
+Robots/Transformers assets remain ignored. See [content provenance](docs/CONTENT_PROVENANCE.md).
+Robots and Transformers are source prototypes; cloning does not supply their
+commercial game data or establish original-game fidelity. Sandbox, Planets and
+Tornado build from repository source and generated/original fixtures.
+
+The Unity project uses its own engine and is not part of the native CMake build.
+Open `UnityProject` using the version in `ProjectSettings/ProjectVersion.txt`.
+The Blender/Unreal/Fab tools are optional and require their documented external
+applications/account setup; installing or logging in is not part of a game build.
+Historical migration scripts under `tools` are records of the completed local
+migration, not setup steps for new clones.
+
+## Historical milestones and limitations
+
+The following sections preserve earlier implementation and verification records.
+Use the publication validation document for checks performed on the public baseline.
 
 ## Kestrel planet milestone
 
