@@ -1,0 +1,19 @@
+{
+  "source": "https://planetarymaps.usgs.gov/mosaic/Venus_Magellan_Topography_Global_4641m_v02.tif",
+  "metadata": "https://astrogeology.usgs.gov/search/map/Venus/Magellan/RadarProperties/Venus_Magellan_Topography_Global_4641m_v02.cub.xml",
+  "attribution": "USGS Astrogeology; Magellan Global Topography Data Record; Ford and Pettengill / NASA PDS",
+  "license": "public domain; cite authors",
+  "source_sha256": "92dd2c8850b128f9dcceb400f1367e3df96229f5309840fee4275b74f192ea11",
+  "dimensions": [
+    8192,
+    4096
+  ],
+  "metres_per_pixel": 4641.0589,
+  "height_datum_radius_m": 6051000,
+  "mean_radius_m": 6051800,
+  "nodata": -32768,
+  "valid_fraction": 0.917119026184082,
+  "minimum_m": -2951,
+  "maximum_m": 11687,
+  "encoding": "gzip: int32 width,height,nodata, then little-endian int16 row-major elevations, north to south; longitude -180 to +180, pixel centers"
+}

@@ -1,0 +1,74 @@
+[
+  {
+    "asset": "aerial_grass_rock",
+    "map": "Albedo",
+    "source": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/1k/aerial_grass_rock/aerial_grass_rock_diff_1k.jpg",
+    "md5": "e920ce36afd0abff000b8366d3d768d3",
+    "license": "CC0",
+    "page": "https://polyhaven.com/a/aerial_grass_rock"
+  },
+  {
+    "asset": "brown_mud_dry",
+    "map": "Albedo",
+    "source": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/1k/brown_mud_dry/brown_mud_dry_diff_1k.jpg",
+    "md5": "0c0ad82fec60f091690c69c23657cb74",
+    "license": "CC0",
+    "page": "https://polyhaven.com/a/brown_mud_dry"
+  },
+  {
+    "asset": "rocky_terrain",
+    "map": "Albedo",
+    "source": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/1k/rocky_terrain/rocky_terrain_diff_1k.jpg",
+    "md5": "306ae62c38ab1942a63e831a534875ab",
+    "license": "CC0",
+    "page": "https://polyhaven.com/a/rocky_terrain"
+  },
+  {
+    "asset": "aerial_grass_rock",
+    "map": "Normal",
+    "source": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/1k/aerial_grass_rock/aerial_grass_rock_nor_gl_1k.jpg",
+    "md5": "c8aa4c4f09b113cc7edef89ddeaccad9",
+    "license": "CC0",
+    "page": "https://polyhaven.com/a/aerial_grass_rock"
+  },
+  {
+    "asset": "rocky_terrain",
+    "map": "Normal",
+    "source": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/1k/rocky_terrain/rocky_terrain_nor_gl_1k.jpg",
+    "md5": "4d42a558317f1d52c9080c73372d125a",
+    "license": "CC0",
+    "page": "https://polyhaven.com/a/rocky_terrain"
+  },
+  {
+    "asset": "brown_mud_dry",
+    "map": "Normal",
+    "source": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/1k/brown_mud_dry/brown_mud_dry_nor_gl_1k.jpg",
+    "md5": "a842517bea5187ccbceb69fd26629d1e",
+    "license": "CC0",
+    "page": "https://polyhaven.com/a/brown_mud_dry"
+  },
+  {
+    "asset": "aerial_grass_rock",
+    "map": "Rough",
+    "source": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/1k/aerial_grass_rock/aerial_grass_rock_rough_1k.jpg",
+    "md5": "f78c5cdc565f990299ae7c5a81f68cf7",
+    "license": "CC0",
+    "page": "https://polyhaven.com/a/aerial_grass_rock"
+  },
+  {
+    "asset": "rocky_terrain",
+    "map": "Rough",
+    "source": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/1k/rocky_terrain/rocky_terrain_rough_1k.jpg",
+    "md5": "8c6721a31face834aee1616d2f8da3f7",
+    "license": "CC0",
+    "page": "https://polyhaven.com/a/rocky_terrain"
+  },
+  {
+    "asset": "brown_mud_dry",
+    "map": "Rough",
+    "source": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/1k/brown_mud_dry/brown_mud_dry_rough_1k.jpg",
+    "md5": "4e047a601af768eded6468faab4ec615",
+    "license": "CC0",
+    "page": "https://polyhaven.com/a/brown_mud_dry"
+  }
+]

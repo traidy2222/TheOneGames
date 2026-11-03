@@ -1,0 +1,74 @@
+[
+  {
+    "asset": "brown_mud_dry",
+    "map": "Albedo",
+    "source": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/1k/brown_mud_dry/brown_mud_dry_diff_1k.jpg",
+    "md5": "0c0ad82fec60f091690c69c23657cb74",
+    "license": "CC0",
+    "page": "https://polyhaven.com/a/brown_mud_dry"
+  },
+  {
+    "asset": "grass_ground",
+    "map": "Albedo",
+    "source": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/1k/grass_ground/grass_ground_diff_1k.jpg",
+    "md5": "299047258586c762735b7284d3c662c3",
+    "license": "CC0",
+    "page": "https://polyhaven.com/a/grass_ground"
+  },
+  {
+    "asset": "rock_boulder_dry",
+    "map": "Albedo",
+    "source": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/1k/rock_boulder_dry/rock_boulder_dry_diff_1k.jpg",
+    "md5": "da794cd9be3db91e3160cf081109f322",
+    "license": "CC0",
+    "page": "https://polyhaven.com/a/rock_boulder_dry"
+  },
+  {
+    "asset": "grass_ground",
+    "map": "Normal",
+    "source": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/1k/grass_ground/grass_ground_nor_gl_1k.jpg",
+    "md5": "d518c5b2af6f2c0297bc807b351f511f",
+    "license": "CC0",
+    "page": "https://polyhaven.com/a/grass_ground"
+  },
+  {
+    "asset": "rock_boulder_dry",
+    "map": "Normal",
+    "source": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/1k/rock_boulder_dry/rock_boulder_dry_nor_gl_1k.jpg",
+    "md5": "6f1c575ceed560ae253f65518cf748e2",
+    "license": "CC0",
+    "page": "https://polyhaven.com/a/rock_boulder_dry"
+  },
+  {
+    "asset": "brown_mud_dry",
+    "map": "Normal",
+    "source": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/1k/brown_mud_dry/brown_mud_dry_nor_gl_1k.jpg",
+    "md5": "a842517bea5187ccbceb69fd26629d1e",
+    "license": "CC0",
+    "page": "https://polyhaven.com/a/brown_mud_dry"
+  },
+  {
+    "asset": "grass_ground",
+    "map": "Rough",
+    "source": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/1k/grass_ground/grass_ground_rough_1k.jpg",
+    "md5": "2e6afca246cf6b80bdb53f46fe7e5ce5",
+    "license": "CC0",
+    "page": "https://polyhaven.com/a/grass_ground"
+  },
+  {
+    "asset": "rock_boulder_dry",
+    "map": "Rough",
+    "source": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/1k/rock_boulder_dry/rock_boulder_dry_rough_1k.jpg",
+    "md5": "0c8b15df3e31c15256da5f8e1b0d0759",
+    "license": "CC0",
+    "page": "https://polyhaven.com/a/rock_boulder_dry"
+  },
+  {
+    "asset": "brown_mud_dry",
+    "map": "Rough",
+    "source": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/1k/brown_mud_dry/brown_mud_dry_rough_1k.jpg",
+    "md5": "4e047a601af768eded6468faab4ec615",
+    "license": "CC0",
+    "page": "https://polyhaven.com/a/brown_mud_dry"
+  }
+]
