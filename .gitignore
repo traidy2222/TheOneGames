@@ -6,3 +6,7 @@
 capture.ppm
 imgui.ini
 *.log
+
+.env
+.env.*
+!.env.example
