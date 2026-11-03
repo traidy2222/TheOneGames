@@ -47,7 +47,8 @@ void sphere(std::vector<Vertex>& vertices, std::vector<Draw>& draws, glm::vec3 c
 int main(int argc, char** argv) {
     try {
         bool validate = false, smoke = false, clean = false;
-        int scenario = 0, framesLimit = 12;
+        int scenario = -1, framesLimit = 12, requestedSteps = 64;
+        double requestedTime = -1;
         std::filesystem::path output = "build/captures";
         for (int i = 1; i < argc; ++i) {
             std::string a = argv[i];
@@ -61,12 +62,20 @@ int main(int argc, char** argv) {
                 scenario = std::stoi(argv[++i]);
             else if (a == "--frames" && i + 1 < argc)
                 framesLimit = std::stoi(argv[++i]);
+            else if (a == "--ray-steps" && i + 1 < argc)
+                requestedSteps = std::stoi(argv[++i]);
+            else if (a == "--time" && i + 1 < argc)
+                requestedTime = std::stod(argv[++i]);
             else if (a == "--output" && i + 1 < argc)
                 output = argv[++i];
             else
                 throw std::runtime_error("Unknown stellar sandbox argument: " + a);
         }
-        need(scenario >= 0 && scenario <= 5 && framesLimit > 0, "Invalid stellar sandbox scenario/frames");
+        if (scenario < 0)
+            scenario = smoke ? 0 : 6;
+        need(scenario >= 0 && scenario <= 10 && framesLimit > 0 && std::isfinite(requestedTime) &&
+                 requestedTime >= -1 && requestedTime <= 1e9 && requestedSteps >= 16 && requestedSteps <= 192,
+             "Invalid stellar sandbox scenario/frames");
         std::filesystem::create_directories(output);
         need(SDL_Init(SDL_INIT_VIDEO), SDL_GetError());
         struct Quit {
@@ -99,7 +108,19 @@ int main(int argc, char** argv) {
         stars.metresPerUnit = unit;
         stars.stars.push_back(StellarEmitter{});
         float distanceAU = .05f, kelvin = 5772, radiusSolar = 1, exposureStops = -14, offset = 0;
-        bool automaticExposure = true, eclipse = false, litSide = false;
+        bool automaticExposure = scenario < 6, eclipse = false, litSide = false;
+        bool activity = scenario >= 6, paused = false;
+        int view = (scenario == 6 || scenario == 10) ? 1 : scenario == 8 ? 2 : 0;
+        int inspection = scenario >= 6 ? (scenario == 7 ? 2 : 1) : 0;
+        float timeScale = 120, magneticStrength = .8f, granuleContrast = .05f;
+        int raySteps = requestedSteps;
+        double simulationTime = requestedTime >= 0 ? requestedTime : scenario == 10 ? 900 : 0;
+        auto viewExposure = [&] {
+            exposureStops = view == 1 ? -16.f : view == 2 ? -4.f : -23.f;
+            automaticExposure = false;
+        };
+        if (activity)
+            viewExposure();
         if (scenario == 1)
             distanceAU = 1;
         if (scenario == 2) {
@@ -121,6 +142,17 @@ int main(int argc, char** argv) {
         camera.nearPlane = .02f;
         camera.farPlane = 2000;
         auto resetCamera = [&] {
+            if (inspection) {
+                glm::vec3 centre{float(-double(distanceAU) * astronomicalUnitMetres / unit), 0, 0};
+                float r = float(solarRadiusMetres * radiusSolar / unit);
+                auto region = stellarActivityRegion(stars.stars[0], 0);
+                glm::vec3 direction =
+                    inspection == 2 ? glm::vec3(0, 0, 1)
+                                    : glm::normalize(glm::vec3(glm::cross(region.normal, region.tangent) +
+                                                               region.normal * .15));
+                aim(camera, centre + direction * r * (inspection == 2 ? 1.012f : 3.3f), centre);
+                return;
+            }
             float r = float(bodyRadius / unit);
             aim(camera, litSide ? glm::vec3(-3 * r, .65f * r, 2 * r) : glm::vec3(3 * r, .65f * r, 2 * r),
                 {0, 0, 0});
@@ -134,13 +166,13 @@ int main(int argc, char** argv) {
         std::vector<Vertex> vertices;
         std::vector<Draw> draws;
         uint64_t revision = 0;
-        float previousOffset = 100;
+        float previousOffset = 100, previousDistanceAU = distanceAU;
         bool previousEclipse = false;
         bool running = true;
         int frames = 0;
         uint64_t previous = SDL_GetTicksNS();
         std::ofstream metrics(output / "frames.csv");
-        metrics << "frame,distance_au,flux_w_m2,visibility,exposure,frame_ms\n";
+        metrics << "frame,distance_au,flux_w_m2,visibility,exposure,stellar_time_s,frame_ms,gpu_ms\n";
         while (running) {
             auto frameStart = SDL_GetTicksNS();
             SDL_Event e;
@@ -176,8 +208,8 @@ int main(int argc, char** argv) {
                             right * float(keys[SDL_SCANCODE_D] - keys[SDL_SCANCODE_A]) +
                             glm::vec3(0, 1, 0) * float(keys[SDL_SCANCODE_E] - keys[SDL_SCANCODE_Q]);
                 if (glm::length(move) > .001f)
-                    camera.position +=
-                        glm::normalize(move) * float(dt) * (keys[SDL_SCANCODE_LSHIFT] ? 80.f : 8.f);
+                    camera.position += glm::normalize(move) * float(dt) *
+                                       (keys[SDL_SCANCODE_LSHIFT] ? 400.f : (inspection ? 45.f : 8.f));
             }
             if (!renderer.beginFrame()) {
                 SDL_Delay(5);
@@ -186,12 +218,44 @@ int main(int argc, char** argv) {
             ImGui_ImplSDL3_NewFrame();
             ImGui::NewFrame();
             bool faceStar = false;
+            if (!smoke && !paused)
+                simulationTime += dt * timeScale;
             if (!clean) {
                 ImGui::SetNextWindowPos({std::max(16.f, ImGui::GetIO().DisplaySize.x - 381.f), 16},
                                         ImGuiCond_FirstUseEver);
                 ImGui::SetNextWindowSize({365, 0}, ImGuiCond_FirstUseEver);
                 ImGui::Begin("Stellar sandbox");
-                ImGui::TextUnformatted("Finite star / dark space");
+                ImGui::PushItemWidth(170);
+                ImGui::TextUnformatted("Procedural stellar activity");
+                ImGui::Checkbox("Surface + plasma", &activity);
+                const char* modes[] = {"Visible continuum", "EUV diagnostic (false colour)",
+                                       "Coronagraph (visible)"};
+                ImGui::SetNextItemWidth(235);
+                if (ImGui::Combo("Observer", &view, modes, 3))
+                    viewExposure();
+                if (ImGui::Button("Whole star")) {
+                    inspection = 1;
+                    resetCamera();
+                    viewExposure();
+                }
+                ImGui::SameLine();
+                if (ImGui::Button("Convection close-up")) {
+                    inspection = 2;
+                    view = 0;
+                    resetCamera();
+                    viewExposure();
+                }
+                ImGui::SliderFloat("Magnetic activity", &magneticStrength, 0, 2);
+                ImGui::SliderFloat("Convection contrast", &granuleContrast, 0, .1f, "%.3f");
+                ImGui::SliderInt("Plasma ray steps", &raySteps, 16, 128);
+                ImGui::SliderFloat("Time acceleration", &timeScale, 1, 600, "%.0fx",
+                                   ImGuiSliderFlags_Logarithmic);
+                ImGui::Checkbox("Pause evolution", &paused);
+                ImGui::SameLine();
+                if (ImGui::Button("Replay"))
+                    simulationTime = 0;
+                ImGui::Text("Stellar time %.1f s", simulationTime);
+                ImGui::Separator();
                 ImGui::SliderFloat("Distance (AU)", &distanceAU, .01f, 1000.f, "%.5g",
                                    ImGuiSliderFlags_Logarithmic);
                 if (ImGui::Button("Near star"))
@@ -208,11 +272,13 @@ int main(int argc, char** argv) {
                 ImGui::SliderFloat("Exposure stops", &exposureStops, -24, 4);
                 if (ImGui::Button("Star + crescent")) {
                     litSide = false;
+                    inspection = 0;
                     resetCamera();
                 }
                 ImGui::SameLine();
                 if (ImGui::Button("Lit side")) {
                     litSide = true;
+                    inspection = 0;
                     resetCamera();
                 }
                 if (ImGui::Button("Face star"))
@@ -224,9 +290,20 @@ int main(int argc, char** argv) {
             }
             distanceAU =
                 std::max(distanceAU, float(solarRadiusMetres * radiusSolar * 1.25 / astronomicalUnitMetres));
+            if (inspection)
+                camera.position.x +=
+                    float((double(previousDistanceAU) - distanceAU) * astronomicalUnitMetres / unit);
+            previousDistanceAU = distanceAU;
             stars.originMetres = {double(distanceAU) * astronomicalUnitMetres, 0, 0};
             stars.stars[0].kelvin = kelvin;
             stars.stars[0].radiusMetres = solarRadiusMetres * radiusSolar;
+            auto& plasma = stars.stars[0].activity;
+            plasma.enabled = activity;
+            plasma.magneticStrength = magneticStrength;
+            plasma.granuleContrast = granuleContrast;
+            plasma.atmosphereSteps = uint32_t(raySteps);
+            stars.view = static_cast<StellarView>(view);
+            stars.timeSeconds = simulationTime;
             stars.occluders = {StellarOccluder{stars.originMetres, bodyRadius, 1}};
             glm::vec3 occulterLocal{float(-4 * bodyRadius / unit), 0, float(offset * bodyRadius / unit)};
             if (eclipse)
@@ -247,7 +324,7 @@ int main(int argc, char** argv) {
                     glm::vec3((stars.stars[0].positionMetres - stars.originMetres) / unit));
             auto worldEye = stars.originMetres + glm::dvec3(camera.position) * unit;
             auto delta = worldEye - stars.stars[0].positionMetres;
-            double exclusion = stars.stars[0].radiusMetres * 1.02;
+            double exclusion = stars.stars[0].radiusMetres * 1.002;
             if (glm::length(delta) < exclusion) {
                 worldEye = stars.stars[0].positionMetres + glm::normalize(delta) * exclusion;
                 camera.position = glm::vec3((worldEye - stars.originMetres) / unit);
@@ -260,15 +337,17 @@ int main(int argc, char** argv) {
                                            1e-12, 16.);
             if (!clean) {
                 ImGui::Text("Luminosity %.4e W", stellarLuminosityWatts(stars.stars[0]));
-                ImGui::Text("Unblocked flux %.6g W/m2", flux);
+                ImGui::Text("Survey body flux %.6g W/m2", flux);
                 ImGui::Text("Substellar visibility %.1f %%", visible * 100);
                 ImGui::Text("Angular diameter %.6g deg",
                             stellarAngularRadius(stars.stars[0], worldEye) * 360 / pi);
                 ImGui::Text("Exposure multiplier %.6g", lighting.exposure);
                 ImGui::TextWrapped("Right mouse looks. WASD flies; Q/E moves vertically; Shift boosts; R "
                                    "resets camera. The observer is a survey camera.");
-                ImGui::TextWrapped("Blackbody emitter, finite disk samples and spherical occultation. No "
-                                   "atmosphere, dust, stellar corona or light-travel delay yet.");
+                ImGui::TextWrapped("Opaque convection surface + raymarched corona, spicules and prescribed "
+                                   "magnetic arches. Procedural model; no MHD simulation. EUV is a "
+                                   "false-colour diagnostic and does not recolour physical illumination.");
+                ImGui::PopItemWidth();
                 ImGui::End();
             }
             renderer.setLighting(lighting);
@@ -277,7 +356,9 @@ int main(int argc, char** argv) {
             bool capture = smoke && frames == framesLimit - 1;
             if (renderer.renderCached(vertices, draws, revision, camera, 0, capture, false)) {
                 metrics << frames << ',' << distanceAU << ',' << flux << ',' << visible << ','
-                        << lighting.exposure << ',' << double(SDL_GetTicksNS() - frameStart) / 1e6 << '\n';
+                        << lighting.exposure << ',' << simulationTime << ','
+                        << double(SDL_GetTicksNS() - frameStart) / 1e6 << ','
+                        << renderer.frameStats().gpuTotalMs << '\n';
                 if (capture)
                     std::filesystem::copy_file("capture.ppm", output / "star.ppm",
                                                std::filesystem::copy_options::overwrite_existing);

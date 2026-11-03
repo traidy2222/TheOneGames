@@ -1,4 +1,6 @@
 add_executable(stellar_sandbox src/main.cpp)
 target_link_libraries(stellar_sandbox PRIVATE TheOne::Renderer TheOne::Lighting)
-set_target_properties(stellar_sandbox PROPERTIES RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin/stellar-sandbox")
+set(STELLAR_RUNTIME_DIRECTORY "${CMAKE_BINARY_DIR}/bin/stellar-sandbox" CACHE PATH "Stellar sandbox runtime directory")
+set_target_properties(stellar_sandbox PROPERTIES RUNTIME_OUTPUT_DIRECTORY "${STELLAR_RUNTIME_DIRECTORY}")
+file(GENERATE OUTPUT "${CMAKE_BINARY_DIR}/launch/stellar-$<CONFIG>.txt" CONTENT "$<TARGET_FILE:stellar_sandbox>")
 theone_copy_shaders(stellar_sandbox)

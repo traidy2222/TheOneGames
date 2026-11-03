@@ -10,5 +10,5 @@ try {
     $arguments=@();$oldLayer=$env:VK_LAYER_PATH
     if($Validate){$arguments+='--validate';$include=Get-Content build/CMakeCache.txt | Where-Object {$_ -like 'Vulkan_INCLUDE_DIR:PATH=*'} | Select-Object -First 1;if($include){$env:VK_LAYER_PATH=Join-Path (Split-Path ($include -split '=',2)[1]) 'Bin'}}
     Push-Location $PSScriptRoot
-    try { & "$gameRoot/build/bin/stellar-sandbox/Release/stellar_sandbox.exe" @arguments } finally {$env:VK_LAYER_PATH=$oldLayer;Pop-Location}
+    try { & (Get-Content "$gameRoot/build/launch/stellar-Release.txt" -Raw).Trim() @arguments } finally {$env:VK_LAYER_PATH=$oldLayer;Pop-Location}
 } finally {Pop-Location}
