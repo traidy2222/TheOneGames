@@ -39,6 +39,11 @@ def main():
     parser.add_argument("--frames", type=int, default=360)
     parser.add_argument("--max-speed", type=float, default=12)
     parser.add_argument("--capture-every", type=int, default=0)
+    parser.add_argument("--reference-solver", action="store_true")
+    parser.add_argument("--realtime", action="store_true")
+    parser.add_argument("--dump-grid", action="store_true")
+    parser.add_argument("--profile-phases", action="store_true")
+    parser.add_argument("--untiled-pressure", action="store_true")
     args = parser.parse_args()
     root = Path(__file__).resolve().parents[3]
     engine = (args.engine or root.parent / "TheOne").resolve()
@@ -55,7 +60,23 @@ def main():
             "--view", str(args.view), "--light", str(args.light), "--quality", str(args.quality), "--frames", str(args.frames),
             "--output", str(output)]
     argv.extend(["--max-speed",str(args.max_speed),"--capture-every",str(args.capture_every)])
+    if args.realtime:
+        argv.append("--realtime")
+    if args.dump_grid:
+        argv.append("--dump-grid")
     env = os.environ.copy()
+    if args.reference_solver:
+        env["THEONE_VOLUME_REFERENCE_SOLVER"] = "1"
+    else:
+        env.pop("THEONE_VOLUME_REFERENCE_SOLVER", None)
+    if args.profile_phases:
+        env["THEONE_VOLUME_PROFILE_PHASES"] = "1"
+    else:
+        env.pop("THEONE_VOLUME_PROFILE_PHASES", None)
+    if args.untiled_pressure:
+        env["THEONE_VOLUME_DISABLE_TILED_PRESSURE"] = "1"
+    else:
+        env.pop("THEONE_VOLUME_DISABLE_TILED_PRESSURE", None)
     candidates = [Path(env["VULKAN_SDK"]) / "Bin"] if env.get("VULKAN_SDK") else []
     for parent in exe.parents:
         cache = parent / "CMakeCache.txt"
@@ -80,14 +101,14 @@ def main():
     if (output / "frames.csv").exists():
         with (output / "frames.csv").open() as trace:
             rows = list(csv.DictReader(trace))[30:]
-        for key in ("sim_ms", "light_ms", "ray_ms", "debt", "bytes", "velocity_clamps", "divergence", "max_speed"):
+        for key in ("sim_ms", "light_ms", "ray_ms", "debt", "bytes", "velocity_clamps", "divergence", "max_speed", "frame_ms", "substeps"):
             values = sorted(float(row[key]) for row in rows)
             if values:
                 metrics[key] = {"mean": statistics.mean(values), "p95": values[int((len(values)-1)*.95)],
                                 "maximum": max(values)}
     metadata = {"argv": argv, "platform": platform.platform(), "gpu": gpu,
                 "start_unix": started, "wall_seconds": time.time()-started,
-                "returncode": run.returncode, "source_before": before, "source_after": after,
+                "returncode": run.returncode, "reference_solver": args.reference_solver, "profile_phases": args.profile_phases, "untiled_pressure": args.untiled_pressure, "realtime": args.realtime, "source_before": before, "source_after": after,
                 "source_unchanged": before == after, "binary_sha256": binaries,
                 "warm_frames_30_onward": metrics,
                 "note": "GPU stage timings at 1280x720; no universal frame-rate or visual-fidelity claim."}

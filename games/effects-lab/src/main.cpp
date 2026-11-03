@@ -99,7 +99,7 @@ void lookAt(Camera& camera, glm::vec3 eye, glm::vec3 target) {
 } // namespace
 int main(int argc, char** argv) {
     try {
-        bool validate = false, smoke = false, clean = false;
+        bool validate = false, smoke = false, clean = false, realtime = false, dumpGrid = false;
         int scenario = 0, framesLimit = 360, view = 0, lightPreset = 0, captureEvery = 0;
         float maximumSpeed = 12;
         std::filesystem::path output = "build/captures";
@@ -110,6 +110,10 @@ int main(int argc, char** argv) {
                 validate = true;
             else if (a == "--smoke-test")
                 smoke = true;
+            else if (a == "--realtime")
+                realtime = true;
+            else if (a == "--dump-grid")
+                dumpGrid = true;
             else if (a == "--clean")
                 clean = true;
             else if (a == "--scenario" && i + 1 < argc)
@@ -198,10 +202,11 @@ int main(int argc, char** argv) {
         std::ofstream trace(output / "frames.csv");
         trace << "frame,requested_time,simulated_time,debt,fuel_kg,soot_kg,burned_"
                  "kg,max_kelvin,sim_ms,light_"
-                 "ms,ray_ms,bytes,velocity_clamps,divergence,max_speed\n";
+                 "ms,ray_ms,bytes,velocity_clamps,divergence,max_speed,frame_ms,substeps,capture\n";
         const char* names[] = {"Open fuel explosion", "Wall interaction",    "Ceiling interaction",
                                "Crosswind",           "Two merging sources", "Zero gravity"};
         while (running) {
+            uint64_t frameStart = SDL_GetTicksNS();
             SDL_Event e;
             while (SDL_PollEvent(&e)) {
                 ImGui_ImplSDL3_ProcessEvent(&e);
@@ -230,7 +235,7 @@ int main(int argc, char** argv) {
                 }
             }
             auto now = SDL_GetTicksNS();
-            double dt = smoke ? 1. / 60. : double(now - previous) / 1e9;
+            double dt = smoke && !realtime ? 1. / 60. : double(now - previous) / 1e9;
             previous = now;
             if (!smoke && !ImGui::GetIO().WantCaptureKeyboard) {
                 auto keys = SDL_GetKeyboardState(nullptr);
@@ -294,7 +299,9 @@ int main(int argc, char** argv) {
                       << s.timeDebtSeconds << ',' << s.fuelKg << ',' << s.sootKg << ',' << s.burnedFuelKg
                       << ',' << s.maximumKelvin << ',' << s.gpuSimulationMs << ',' << s.gpuLightingMs << ','
                       << s.gpuRaymarchMs << ',' << s.allocatedBytes << ',' << s.velocityClamps << ','
-                      << s.maximumDivergenceError << ',' << s.maximumSpeed << '\n';
+                      << s.maximumDivergenceError << ',' << s.maximumSpeed << ','
+                      << double(SDL_GetTicksNS() - frameStart) / 1e6 << ',' << s.substeps << ','
+                      << int(capture) << '\n';
                 if (capture)
                     std::filesystem::copy_file("capture.ppm",
                                                output / ("frame-" + std::to_string(frames) + ".ppm"),
@@ -305,6 +312,13 @@ int main(int argc, char** argv) {
                 running = false;
         }
         auto snapshot = renderer.captureVolumeState();
+        if (dumpGrid) {
+            std::ofstream grid(output / "grid.bin", std::ios::binary);
+            grid.write(reinterpret_cast<const char*>(snapshot.cells.data()),
+                       snapshot.cells.size() * sizeof(VolumeCell));
+            if (!grid)
+                throw std::runtime_error("Diagnostic grid write failed");
+        }
         std::ofstream summary(output / "summary.txt");
         auto s = snapshot.stats;
         summary << "requested_seconds=" << lab.scene.timeSeconds
