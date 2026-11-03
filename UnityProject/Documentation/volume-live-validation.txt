@@ -1,0 +1,34 @@
+Live Venus descent and 140 m underground traversal. Input locked for reproducibility.
+phase=0; altitude=12062859.270; meshChunks=0; cachePages=0
+phase=0; altitude=6032920.590; meshChunks=0; cachePages=0
+phase=0; altitude=2303998.479; meshChunks=0; cachePages=0
+phase=0; altitude=879734.981; meshChunks=0; cachePages=0
+phase=0; altitude=335996.815; meshChunks=0; cachePages=0
+phase=0; altitude=128365.243; meshChunks=0; cachePages=0
+phase=0; altitude=49021.150; meshChunks=0; cachePages=0
+phase=0; altitude=18724.433; meshChunks=0; cachePages=0
+phase=0; altitude=7150.684; meshChunks=0; cachePages=0
+phase=0; altitude=2732.614; meshChunks=0; cachePages=0
+phase=0; altitude=1044.438; meshChunks=0; cachePages=0
+phase=0; altitude=400.180; meshChunks=0; cachePages=0
+phase=0; altitude=154.081; meshChunks=0; cachePages=0
+phase=0; altitude=60.083; meshChunks=27; cachePages=128
+phase=0; altitude=24.180; meshChunks=27; cachePages=128
+phase=0; altitude=10.474; meshChunks=27; cachePages=128
+phase=0; altitude=5.235; meshChunks=27; cachePages=128
+phase=0; altitude=2.233; meshChunks=27; cachePages=128
+phase=1; altitude=-16.474; meshChunks=27; cachePages=128
+phase=1; altitude=-39.318; meshChunks=27; cachePages=128
+phase=1; altitude=-60.934; meshChunks=27; cachePages=128
+phase=1; altitude=-82.539; meshChunks=27; cachePages=128
+phase=1; altitude=-104.144; meshChunks=27; cachePages=128
+phase=1; altitude=-124.541; meshChunks=27; cachePages=128
+PASS: travelled continuously below old depth floor to 140 m; saved/reloaded tunnel; wall collider; no surface snap or underground orbit teleport.
+phase=3; altitude=-134.595; meshChunks=27; cachePages=125
+phase=3; altitude=-104.188; meshChunks=36; cachePages=128
+phase=3; altitude=-74.574; meshChunks=36; cachePages=128
+phase=3; altitude=-44.506; meshChunks=27; cachePages=128
+phase=3; altitude=-12.100; meshChunks=27; cachePages=128
+PASS: returned through the same tunnel to the surface without changing scene or camera.
+
+Build verification: updated Windows player built successfully. Hidden standalone startup smoke ran for 10 seconds without managed exceptions; the existing Direct3D debug info-queue warning remained nonfatal. Space/surface and alternate-planet batch regression checks also passed after the volume replacement. The full underground journey was verified in the live editor, not automated in the standalone player.

@@ -1,0 +1,1 @@
+PASS: existing saved 140 m shaft, sky visible with lamp off; centre luminance 0.3547; 96 visible chunks. Headlamp enabled and control released.

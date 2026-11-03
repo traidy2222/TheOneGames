@@ -1,0 +1,2 @@
+PASS: unchanged scene and camera at 7 altitudes, metre precision, parent coverage during refinement, bounded tile cache, continuous monotonic descent/ascent, alternate planet sampler and renderer at cube seam/pole/dateline, shader compilation.
+Max resident nodes: 334. Worst full Tick observed in batch: 3.13 ms (not a gameplay frame-rate guarantee).

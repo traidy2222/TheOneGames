@@ -1,0 +1,1 @@
+PASS: scene generation, density excavation/refill, collider excavation/refill, chunk-boundary edit, undo, save/load round trip, malformed save rejection, closed cavity and mesh checks.

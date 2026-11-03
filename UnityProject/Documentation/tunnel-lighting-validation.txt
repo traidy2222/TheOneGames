@@ -1,0 +1,5 @@
+PASS: 140 m entrance and connecting tunnel meshes retained; edited geometry retained at 1 km; visible sky with lamp off; fill plug blocks sky and image; undo restores opening; nonzero one-bounce lamp transport; solid probes/rock rays reject light; shadow shader variants compile.
+Open centre luminance 0.3547; sealed 0.0000; bounce 0.028193; shadow-darkened pixels 19605.
+View distance 4096 m; resident meshes 114; visible 114.
+
+Final combined regression: tunnel/lighting, full test-planet interior traversal and continuous planetary flight all passed in one batch run, with no reported shader errors or native-allocation leaks. Updated Windows build succeeded; hidden standalone startup ran for 10 seconds without managed exceptions or shader errors. The driver's existing unavailable D3D12 debug info-queue warning was nonfatal. Detailed tunnel interaction was tested in the live editor and batch renderer; standalone testing was startup-only.

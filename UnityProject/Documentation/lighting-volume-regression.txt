@@ -1,0 +1,3 @@
+PASS: complete 268 m test-world traversal from outside one side, through centre, to opposite exterior; same camera/scene, persistent full tunnel, collision against walls, no artificial chunk caps, signed chunk seams, bounded cache/stream.
+PASS: full-size Venus excavation/mesh probes at 100 m, 1 km, 50 km, 1000 km, 3000 km, centre, across centre and opposite side.
+Peak resident mesh chunks: 189. Density cache cap: 128 pages. Full 12,100 km Venus tunnel was not excavated end-to-end in this test.

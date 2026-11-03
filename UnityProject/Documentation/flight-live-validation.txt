@@ -1,0 +1,55 @@
+Continuous live round trip, input locked for reproducibility.
+phase=0; altitude=12062859.270; camera=-79196; scene=-13304; nodes=6; level=0; excavation=False
+phase=0; altitude=8028932.483; camera=-79196; scene=-13304; nodes=10; level=1; excavation=False
+phase=0; altitude=4376868.988; camera=-79196; scene=-13304; nodes=18; level=2; excavation=False
+phase=0; altitude=2303757.606; camera=-79196; scene=-13304; nodes=34; level=3; excavation=False
+phase=0; altitude=1212676.108; camera=-79196; scene=-13304; nodes=54; level=4; excavation=False
+phase=0; altitude=639452.363; camera=-79196; scene=-13304; nodes=62; level=4; excavation=False
+phase=0; altitude=336591.237; camera=-79196; scene=-13304; nodes=82; level=5; excavation=False
+phase=0; altitude=177198.694; camera=-79196; scene=-13304; nodes=102; level=6; excavation=False
+phase=0; altitude=93187.003; camera=-79196; scene=-13304; nodes=126; level=7; excavation=False
+phase=0; altitude=49073.414; camera=-79196; scene=-13304; nodes=134; level=8; excavation=False
+phase=0; altitude=25828.376; camera=-79196; scene=-13304; nodes=154; level=9; excavation=False
+phase=0; altitude=13598.232; camera=-79196; scene=-13304; nodes=174; level=10; excavation=False
+phase=0; altitude=7119.305; camera=-79196; scene=-13304; nodes=186; level=11; excavation=False
+phase=0; altitude=3749.021; camera=-79196; scene=-13304; nodes=210; level=12; excavation=False
+phase=0; altitude=1971.001; camera=-79196; scene=-13304; nodes=226; level=13; excavation=False
+phase=0; altitude=1042.525; camera=-79196; scene=-13304; nodes=226; level=13; excavation=False
+phase=0; altitude=548.495; camera=-79196; scene=-13304; nodes=242; level=14; excavation=True
+phase=0; altitude=289.678; camera=-79196; scene=-13304; nodes=258; level=15; excavation=True
+phase=0; altitude=153.430; camera=-79196; scene=-13304; nodes=274; level=16; excavation=True
+phase=0; altitude=81.708; camera=-79196; scene=-13304; nodes=290; level=17; excavation=True
+phase=0; altitude=43.955; camera=-79196; scene=-13304; nodes=302; level=18; excavation=True
+phase=0; altitude=24.084; camera=-79196; scene=-13304; nodes=314; level=19; excavation=True
+phase=0; altitude=13.625; camera=-79196; scene=-13304; nodes=326; level=20; excavation=True
+phase=0; altitude=8.120; camera=-79196; scene=-13304; nodes=334; level=20; excavation=True
+phase=0; altitude=5.204; camera=-79196; scene=-13304; nodes=334; level=20; excavation=True
+phase=0; altitude=3.203; camera=-79196; scene=-13304; nodes=334; level=20; excavation=True
+PASS: descent, streamed excavation, collider, save/load, undo.
+phase=1; altitude=2.003; camera=-79196; scene=-13304; nodes=334; level=20; excavation=True
+phase=1; altitude=12.233; camera=-79196; scene=-13304; nodes=330; level=20; excavation=True
+phase=1; altitude=23.826; camera=-79196; scene=-13304; nodes=314; level=19; excavation=True
+phase=1; altitude=45.114; camera=-79196; scene=-13304; nodes=302; level=18; excavation=True
+phase=1; altitude=85.387; camera=-79196; scene=-13304; nodes=290; level=17; excavation=True
+phase=1; altitude=161.671; camera=-79196; scene=-13304; nodes=274; level=16; excavation=True
+phase=1; altitude=306.090; camera=-79196; scene=-13304; nodes=258; level=15; excavation=True
+phase=1; altitude=579.645; camera=-79196; scene=-13304; nodes=242; level=14; excavation=True
+phase=1; altitude=1097.265; camera=-79196; scene=-13304; nodes=226; level=13; excavation=True
+phase=1; altitude=2077.290; camera=-79196; scene=-13304; nodes=226; level=13; excavation=False
+phase=1; altitude=3933.164; camera=-79196; scene=-13304; nodes=210; level=12; excavation=False
+phase=1; altitude=7445.545; camera=-79196; scene=-13304; nodes=186; level=11; excavation=False
+phase=1; altitude=14097.920; camera=-79196; scene=-13304; nodes=166; level=10; excavation=False
+phase=1; altitude=26691.766; camera=-79196; scene=-13304; nodes=154; level=9; excavation=False
+phase=1; altitude=50532.452; camera=-79196; scene=-13304; nodes=134; level=8; excavation=False
+phase=1; altitude=96178.366; camera=-79196; scene=-13304; nodes=122; level=7; excavation=False
+phase=1; altitude=182092.529; camera=-79196; scene=-13304; nodes=102; level=6; excavation=False
+phase=1; altitude=344752.518; camera=-79196; scene=-13304; nodes=82; level=5; excavation=False
+phase=1; altitude=652699.964; camera=-79196; scene=-13304; nodes=62; level=4; excavation=False
+phase=1; altitude=1235778.282; camera=-79196; scene=-13304; nodes=50; level=4; excavation=False
+phase=1; altitude=2339760.729; camera=-79196; scene=-13304; nodes=34; level=3; excavation=False
+phase=1; altitude=4429421.567; camera=-79196; scene=-13304; nodes=18; level=2; excavation=False
+phase=1; altitude=8093091.670; camera=-79196; scene=-13304; nodes=10; level=1; excavation=False
+phase=1; altitude=12091649.669; camera=-79196; scene=-13304; nodes=6; level=0; excavation=False
+PASS: continuous ascent back to orbit; unchanged camera/scene for the entire journey.
+
+Windows build: succeeded at Builds/Venus/Venus.exe. Hidden standalone startup check remained running for 10 seconds without managed exceptions; graphics initialized on RTX 3080 / Direct3D 12. The driver logged an unavailable debug info-queue interface; startup continued. Interactive standalone flight was not automated; the full journey and excavation were verified in the live editor through the bridge. Final shader/automatic-ascent presentation changes also passed the batch altitude and alternate-planet checks.

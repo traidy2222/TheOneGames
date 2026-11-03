@@ -1,0 +1,5 @@
+PASS: 8192x4096 measured DEM, datum conversion, longitude seam, double precision metre offset, coordinate round trip, orbital and surface renders, digging collision, undo, surface traversal.
+Venera region elevation above Magellan datum: 1540.617 m.
+Mean radius: 6051800 m; datum: 6051000 m; gravity: 8.87 m/s2.
+Global measured coverage: 91.7119%; invalid pixels are explicitly flagged.
+Local detail, cloud pattern, haze and lighting are reconstructions.
