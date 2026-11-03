@@ -1,0 +1,1009 @@
+{
+  "binary_sha256": {
+    "effects_lab.exe": "bf45509385d60fcf9b1dc3798c167e0a71117c8c5468e01a75182c9c65bfcfe2",
+    "mesh.vert.spv": "af0627e332165bbc724e3649a144eb2f47a3a6211e1abdba80bec780f927ba92",
+    "mesh_hdr.vert.spv": "af0627e332165bbc724e3649a144eb2f47a3a6211e1abdba80bec780f927ba92",
+    "mesh_shadow.vert.spv": "d6897e7dd130da2cbe563363009bec40a6da2f2cfb630e0edc1b031aad509125",
+    "mesh_shadow_mask.vert.spv": "e25ba4092b4094b638a68a27d39a519e2fdc2ee68ad15898547de5837cabd600",
+    "scene.frag.spv": "d44deaa2c805cc3add909a7c1868943fbb93aa9e2e82fe2f87b74fb9684b9d21",
+    "scene.vert.spv": "f769f77be2a417d4fb87fc13a766bdf1189361b6d48b65811af86303b382aa21",
+    "scene_hdr.frag.spv": "2d008d22a6d4dcd1f9192d69e6441b09f853411d407810ff75c055af575bba3b",
+    "scene_hdr.vert.spv": "f769f77be2a417d4fb87fc13a766bdf1189361b6d48b65811af86303b382aa21",
+    "shadow.vert.spv": "585b7542279d579152378a1b62a5ad390ac25851d05741c80d34a4290eb3d84a",
+    "shadow_mask.frag.spv": "120a62eaee5523f895ee35ad72b0dc02cef2184e0d33ecb7b4ee8700b7457012",
+    "shadow_mask.vert.spv": "442d9f3fc30f2316d3ceccee076dbad64c0dd2af80978253039345511d5e39d7",
+    "volume_fullscreen.vert.spv": "3f5fcac1787300c74a356259179c121e35898643d963fea6cd13ca2a2601d3c6",
+    "volume_light.comp.spv": "c51983aaf994f7acdd959ed9afa3e92f1612f4a635cdf4be4980cf26a45fc92c",
+    "volume_output.frag.spv": "f7dd8564371f28fe5610fcc1c6bdfa377679ff13dc67cdabfdce5c8a84a07db0",
+    "volume_resolve.frag.spv": "50348e98678fbda67d944321003b06cee81e98be99d48768dce80f2c140f4b53",
+    "volume_sim.comp.spv": "cb337758e2a8acc489048ee811136c4a130cd45dca4c164a4897b79c3fe562fc"
+  },
+  "media_sha256": {
+    "fuel-to-smoke.mp4": "778711a9108f6d2ca333e4e2c6fd409428e04d307f5380e60beb0bbbae16be0c",
+    "fuel-to-smoke.png": "6b38a9e44623d8dd560f1cdce0745e797a2b55e6108e0b51fc64a693e4455a57",
+    "full-lifecycle.png": "fb4d9bc6e447e0db906863f5ef8cf8592ff1d8ac85c3c377dfca577ecf9cedcc",
+    "merging-sources.png": "7c8e2d89489bb069793b9e28ced7b65a548e719db28e12e8039bed8176138f5c",
+    "obstacle-response.png": "348643e63949707a49e94028fffcc650c71503ec36f56f39d4224be47082e71f"
+  },
+  "runs": [
+    {
+      "name": "effects-accepted-ceiling",
+      "argv": [
+        "--smoke-test",
+        "--validate",
+        "--clean",
+        "--scenario",
+        "2",
+        "--view",
+        "0",
+        "--light",
+        "0",
+        "--quality",
+        "48",
+        "--frames",
+        "240",
+        "--output",
+        "build/publication/verification/effects-accepted-ceiling",
+        "--max-speed",
+        "12",
+        "--capture-every",
+        "0"
+      ],
+      "source": {
+        "engine": {
+          "commit": "cec2f70f78591be2a57f5d6b186c16fc07634e59",
+          "tree_sha256": "a05325b508552eb19f2ce591aa2a2bf88edc331073655a0344860cf05ab28d23"
+        },
+        "games": {
+          "commit": "6f856c9c4e6842ee153f474237d5b2b979761ba8",
+          "tree_sha256": "ad678bb36ec1c4c6f91a1ab2f46beb34916a366a383e672d28e19f33b33d1094"
+        }
+      },
+      "gpu": "NVIDIA GeForce RTX 3080, 617.42, 10240 MiB",
+      "exit": 0,
+      "source_unchanged": true,
+      "warm_frames_30_onward": {
+        "sim_ms": {
+          "mean": 29.135437142857143,
+          "p95": 31.1354,
+          "maximum": 32.0238
+        },
+        "light_ms": {
+          "mean": 0.1818185142857143,
+          "p95": 0.55808,
+          "maximum": 0.966656
+        },
+        "ray_ms": {
+          "mean": 0.9695770190476191,
+          "p95": 1.44486,
+          "maximum": 1.84422
+        },
+        "debt": {
+          "mean": 0.0012499917095238095,
+          "p95": 0.00249999,
+          "maximum": 0.0025
+        },
+        "bytes": {
+          "mean": 87535936.0,
+          "p95": 87535936.0,
+          "maximum": 87535936.0
+        },
+        "velocity_clamps": {
+          "mean": 0.0,
+          "p95": 0.0,
+          "maximum": 0.0
+        },
+        "divergence": {
+          "mean": 0.02008744142857143,
+          "p95": 0.0621526,
+          "maximum": 0.140774
+        },
+        "max_speed": {
+          "mean": 3.1079574761904762,
+          "p95": 5.8571,
+          "maximum": 6.24524
+        }
+      },
+      "final_summary": {
+        "requested_seconds": "4",
+        "simulated_seconds": "3.99875",
+        "fuel_kg": "0.0781673",
+        "soot_kg": "0.00552276",
+        "burned_kg": "0.101586",
+        "max_kelvin": "328.775",
+        "clamps": "0",
+        "max_speed": "1.38326"
+      }
+    },
+    {
+      "name": "effects-accepted-hero",
+      "argv": [
+        "--smoke-test",
+        "--validate",
+        "--clean",
+        "--scenario",
+        "0",
+        "--view",
+        "3",
+        "--light",
+        "0",
+        "--quality",
+        "64",
+        "--frames",
+        "150",
+        "--output",
+        "build/publication/verification/effects-accepted-hero",
+        "--max-speed",
+        "12",
+        "--capture-every",
+        "0"
+      ],
+      "source": {
+        "engine": {
+          "commit": "cec2f70f78591be2a57f5d6b186c16fc07634e59",
+          "tree_sha256": "a05325b508552eb19f2ce591aa2a2bf88edc331073655a0344860cf05ab28d23"
+        },
+        "games": {
+          "commit": "6f856c9c4e6842ee153f474237d5b2b979761ba8",
+          "tree_sha256": "ad678bb36ec1c4c6f91a1ab2f46beb34916a366a383e672d28e19f33b33d1094"
+        }
+      },
+      "gpu": "NVIDIA GeForce RTX 3080, 617.42, 10240 MiB",
+      "exit": 0,
+      "source_unchanged": true,
+      "warm_frames_30_onward": {
+        "sim_ms": {
+          "mean": 70.13519833333334,
+          "p95": 82.3771,
+          "maximum": 95.4326
+        },
+        "light_ms": {
+          "mean": 1.19825915,
+          "p95": 3.13446,
+          "maximum": 3.80314
+        },
+        "ray_ms": {
+          "mean": 2.043929416666667,
+          "p95": 2.81805,
+          "maximum": 3.17747
+        },
+        "debt": {
+          "mean": 0.0010364522333333333,
+          "p95": 0.00197916,
+          "maximum": 0.00208333
+        },
+        "bytes": {
+          "mean": 126657664.0,
+          "p95": 126657664.0,
+          "maximum": 126657664.0
+        },
+        "velocity_clamps": {
+          "mean": 0.0,
+          "p95": 0.0,
+          "maximum": 0.0
+        },
+        "divergence": {
+          "mean": 0.09470440416666667,
+          "p95": 0.165062,
+          "maximum": 0.191931
+        },
+        "max_speed": {
+          "mean": 8.314817416666667,
+          "p95": 11.1959,
+          "maximum": 11.375
+        }
+      },
+      "final_summary": {
+        "requested_seconds": "2.5",
+        "simulated_seconds": "2.49813",
+        "fuel_kg": "0.0776778",
+        "soot_kg": "0.00562773",
+        "burned_kg": "0.102322",
+        "max_kelvin": "392.366",
+        "clamps": "0",
+        "max_speed": "6.95526"
+      }
+    },
+    {
+      "name": "effects-accepted-highsun",
+      "argv": [
+        "--smoke-test",
+        "--validate",
+        "--clean",
+        "--scenario",
+        "0",
+        "--view",
+        "0",
+        "--light",
+        "2",
+        "--quality",
+        "48",
+        "--frames",
+        "150",
+        "--output",
+        "build/publication/verification/effects-accepted-highsun",
+        "--max-speed",
+        "12",
+        "--capture-every",
+        "0"
+      ],
+      "source": {
+        "engine": {
+          "commit": "cec2f70f78591be2a57f5d6b186c16fc07634e59",
+          "tree_sha256": "a05325b508552eb19f2ce591aa2a2bf88edc331073655a0344860cf05ab28d23"
+        },
+        "games": {
+          "commit": "6f856c9c4e6842ee153f474237d5b2b979761ba8",
+          "tree_sha256": "ad678bb36ec1c4c6f91a1ab2f46beb34916a366a383e672d28e19f33b33d1094"
+        }
+      },
+      "gpu": "NVIDIA GeForce RTX 3080, 617.42, 10240 MiB",
+      "exit": 0,
+      "source_unchanged": true,
+      "warm_frames_30_onward": {
+        "sim_ms": {
+          "mean": 24.468921666666667,
+          "p95": 26.0437,
+          "maximum": 26.507
+        },
+        "light_ms": {
+          "mean": 0.3907838,
+          "p95": 1.03117,
+          "maximum": 1.04243
+        },
+        "ray_ms": {
+          "mean": 0.75587405,
+          "p95": 1.17862,
+          "maximum": 1.41517
+        },
+        "debt": {
+          "mean": 0.0012430499083333334,
+          "p95": 0.00249999,
+          "maximum": 0.0025
+        },
+        "bytes": {
+          "mean": 87535936.0,
+          "p95": 87535936.0,
+          "maximum": 87535936.0
+        },
+        "velocity_clamps": {
+          "mean": 0.0,
+          "p95": 0.0,
+          "maximum": 0.0
+        },
+        "divergence": {
+          "mean": 0.049689463333333336,
+          "p95": 0.0888906,
+          "maximum": 0.14175
+        },
+        "max_speed": {
+          "mean": 7.876582583333334,
+          "p95": 9.57764,
+          "maximum": 9.77149
+        }
+      },
+      "final_summary": {
+        "requested_seconds": "2.5",
+        "simulated_seconds": "2.49958",
+        "fuel_kg": "0.0847209",
+        "soot_kg": "0.00524035",
+        "burned_kg": "0.095279",
+        "max_kelvin": "380.327",
+        "clamps": "0",
+        "max_speed": "6.82765"
+      }
+    },
+    {
+      "name": "effects-accepted-inside",
+      "argv": [
+        "--smoke-test",
+        "--validate",
+        "--clean",
+        "--scenario",
+        "0",
+        "--view",
+        "2",
+        "--light",
+        "3",
+        "--quality",
+        "48",
+        "--frames",
+        "150",
+        "--output",
+        "build/publication/verification/effects-accepted-inside",
+        "--max-speed",
+        "12",
+        "--capture-every",
+        "0"
+      ],
+      "source": {
+        "engine": {
+          "commit": "cec2f70f78591be2a57f5d6b186c16fc07634e59",
+          "tree_sha256": "a05325b508552eb19f2ce591aa2a2bf88edc331073655a0344860cf05ab28d23"
+        },
+        "games": {
+          "commit": "6f856c9c4e6842ee153f474237d5b2b979761ba8",
+          "tree_sha256": "ad678bb36ec1c4c6f91a1ab2f46beb34916a366a383e672d28e19f33b33d1094"
+        }
+      },
+      "gpu": "NVIDIA GeForce RTX 3080, 617.42, 10240 MiB",
+      "exit": 0,
+      "source_unchanged": true,
+      "warm_frames_30_onward": {
+        "sim_ms": {
+          "mean": 25.99175,
+          "p95": 31.8412,
+          "maximum": 34.7438
+        },
+        "light_ms": {
+          "mean": 0.41456641666666666,
+          "p95": 1.04346,
+          "maximum": 1.47763
+        },
+        "ray_ms": {
+          "mean": 0.9915136666666666,
+          "p95": 1.63738,
+          "maximum": 1.82579
+        },
+        "debt": {
+          "mean": 0.0012430499083333334,
+          "p95": 0.00249999,
+          "maximum": 0.0025
+        },
+        "bytes": {
+          "mean": 87535936.0,
+          "p95": 87535936.0,
+          "maximum": 87535936.0
+        },
+        "velocity_clamps": {
+          "mean": 0.0,
+          "p95": 0.0,
+          "maximum": 0.0
+        },
+        "divergence": {
+          "mean": 0.049689505,
+          "p95": 0.0888906,
+          "maximum": 0.14175
+        },
+        "max_speed": {
+          "mean": 7.8765835,
+          "p95": 9.57764,
+          "maximum": 9.77149
+        }
+      },
+      "final_summary": {
+        "requested_seconds": "2.5",
+        "simulated_seconds": "2.49958",
+        "fuel_kg": "0.0847209",
+        "soot_kg": "0.00524035",
+        "burned_kg": "0.095279",
+        "max_kelvin": "380.327",
+        "clamps": "0",
+        "max_speed": "6.82766"
+      }
+    },
+    {
+      "name": "effects-accepted-merging",
+      "argv": [
+        "--smoke-test",
+        "--validate",
+        "--clean",
+        "--scenario",
+        "4",
+        "--view",
+        "0",
+        "--light",
+        "0",
+        "--quality",
+        "48",
+        "--frames",
+        "240",
+        "--output",
+        "build/publication/verification/effects-accepted-merging",
+        "--max-speed",
+        "12",
+        "--capture-every",
+        "0"
+      ],
+      "source": {
+        "engine": {
+          "commit": "cec2f70f78591be2a57f5d6b186c16fc07634e59",
+          "tree_sha256": "a05325b508552eb19f2ce591aa2a2bf88edc331073655a0344860cf05ab28d23"
+        },
+        "games": {
+          "commit": "6f856c9c4e6842ee153f474237d5b2b979761ba8",
+          "tree_sha256": "ad678bb36ec1c4c6f91a1ab2f46beb34916a366a383e672d28e19f33b33d1094"
+        }
+      },
+      "gpu": "NVIDIA GeForce RTX 3080, 617.42, 10240 MiB",
+      "exit": 0,
+      "source_unchanged": true,
+      "warm_frames_30_onward": {
+        "sim_ms": {
+          "mean": 25.270610476190477,
+          "p95": 27.807,
+          "maximum": 29.2371
+        },
+        "light_ms": {
+          "mean": 0.2743393333333333,
+          "p95": 1.024,
+          "maximum": 1.46022
+        },
+        "ray_ms": {
+          "mean": 0.9085170761904762,
+          "p95": 1.55955,
+          "maximum": 1.77152
+        },
+        "debt": {
+          "mean": 0.0012499917095238095,
+          "p95": 0.00249999,
+          "maximum": 0.0025
+        },
+        "bytes": {
+          "mean": 87535936.0,
+          "p95": 87535936.0,
+          "maximum": 87535936.0
+        },
+        "velocity_clamps": {
+          "mean": 0.0,
+          "p95": 0.0,
+          "maximum": 0.0
+        },
+        "divergence": {
+          "mean": 0.031436038095238095,
+          "p95": 0.0827324,
+          "maximum": 0.119384
+        },
+        "max_speed": {
+          "mean": 5.834580142857143,
+          "p95": 6.96898,
+          "maximum": 7.13314
+        }
+      },
+      "final_summary": {
+        "requested_seconds": "4",
+        "simulated_seconds": "3.99875",
+        "fuel_kg": "0.0781574",
+        "soot_kg": "0.00659134",
+        "burned_kg": "0.119842",
+        "max_kelvin": "324.757",
+        "clamps": "0",
+        "max_speed": "4.649"
+      }
+    },
+    {
+      "name": "effects-accepted-motion",
+      "argv": [
+        "--smoke-test",
+        "--validate",
+        "--clean",
+        "--scenario",
+        "0",
+        "--view",
+        "4",
+        "--light",
+        "0",
+        "--quality",
+        "48",
+        "--frames",
+        "240",
+        "--output",
+        "build/publication/verification/effects-accepted-motion",
+        "--max-speed",
+        "12",
+        "--capture-every",
+        "2"
+      ],
+      "source": {
+        "engine": {
+          "commit": "cec2f70f78591be2a57f5d6b186c16fc07634e59",
+          "tree_sha256": "a05325b508552eb19f2ce591aa2a2bf88edc331073655a0344860cf05ab28d23"
+        },
+        "games": {
+          "commit": "6f856c9c4e6842ee153f474237d5b2b979761ba8",
+          "tree_sha256": "ad678bb36ec1c4c6f91a1ab2f46beb34916a366a383e672d28e19f33b33d1094"
+        }
+      },
+      "gpu": "NVIDIA GeForce RTX 3080, 617.42, 10240 MiB",
+      "exit": 0,
+      "source_unchanged": true,
+      "warm_frames_30_onward": {
+        "sim_ms": {
+          "mean": 37.80936333333333,
+          "p95": 48.1237,
+          "maximum": 117.84
+        },
+        "light_ms": {
+          "mean": 0.4182552761904762,
+          "p95": 1.56058,
+          "maximum": 2.36544
+        },
+        "ray_ms": {
+          "mean": 0.9643982571428571,
+          "p95": 1.64352,
+          "maximum": 2.89485
+        },
+        "debt": {
+          "mean": 0.0012499917095238095,
+          "p95": 0.00249999,
+          "maximum": 0.0025
+        },
+        "bytes": {
+          "mean": 87535936.0,
+          "p95": 87535936.0,
+          "maximum": 87535936.0
+        },
+        "velocity_clamps": {
+          "mean": 0.0,
+          "p95": 0.0,
+          "maximum": 0.0
+        },
+        "divergence": {
+          "mean": 0.0372264819047619,
+          "p95": 0.0859327,
+          "maximum": 0.14175
+        },
+        "max_speed": {
+          "mean": 7.010232333333334,
+          "p95": 9.41059,
+          "maximum": 9.77149
+        }
+      },
+      "final_summary": {
+        "requested_seconds": "4",
+        "simulated_seconds": "3.99875",
+        "fuel_kg": "0.0847209",
+        "soot_kg": "0.00524035",
+        "burned_kg": "0.095279",
+        "max_kelvin": "324.097",
+        "clamps": "0",
+        "max_speed": "4.89359"
+      }
+    },
+    {
+      "name": "effects-accepted-open",
+      "argv": [
+        "--smoke-test",
+        "--validate",
+        "--clean",
+        "--scenario",
+        "0",
+        "--view",
+        "4",
+        "--light",
+        "0",
+        "--quality",
+        "48",
+        "--frames",
+        "240",
+        "--output",
+        "build/publication/verification/effects-accepted-open",
+        "--max-speed",
+        "12",
+        "--capture-every",
+        "0"
+      ],
+      "source": {
+        "engine": {
+          "commit": "cec2f70f78591be2a57f5d6b186c16fc07634e59",
+          "tree_sha256": "a05325b508552eb19f2ce591aa2a2bf88edc331073655a0344860cf05ab28d23"
+        },
+        "games": {
+          "commit": "6f856c9c4e6842ee153f474237d5b2b979761ba8",
+          "tree_sha256": "ad678bb36ec1c4c6f91a1ab2f46beb34916a366a383e672d28e19f33b33d1094"
+        }
+      },
+      "gpu": "NVIDIA GeForce RTX 3080, 617.42, 10240 MiB",
+      "exit": 0,
+      "source_unchanged": true,
+      "warm_frames_30_onward": {
+        "sim_ms": {
+          "mean": 25.21066904761905,
+          "p95": 27.3093,
+          "maximum": 28.5782
+        },
+        "light_ms": {
+          "mean": 0.2802053904761905,
+          "p95": 1.00966,
+          "maximum": 1.42438
+        },
+        "ray_ms": {
+          "mean": 0.5713822476190477,
+          "p95": 1.00557,
+          "maximum": 1.24416
+        },
+        "debt": {
+          "mean": 0.0012499917095238095,
+          "p95": 0.00249999,
+          "maximum": 0.0025
+        },
+        "bytes": {
+          "mean": 87535936.0,
+          "p95": 87535936.0,
+          "maximum": 87535936.0
+        },
+        "velocity_clamps": {
+          "mean": 0.0,
+          "p95": 0.0,
+          "maximum": 0.0
+        },
+        "divergence": {
+          "mean": 0.0372264819047619,
+          "p95": 0.0859327,
+          "maximum": 0.14175
+        },
+        "max_speed": {
+          "mean": 7.010232333333334,
+          "p95": 9.41059,
+          "maximum": 9.77149
+        }
+      },
+      "final_summary": {
+        "requested_seconds": "4",
+        "simulated_seconds": "3.99875",
+        "fuel_kg": "0.0847209",
+        "soot_kg": "0.00524035",
+        "burned_kg": "0.095279",
+        "max_kelvin": "324.097",
+        "clamps": "0",
+        "max_speed": "4.89359"
+      }
+    },
+    {
+      "name": "effects-accepted-opposite",
+      "argv": [
+        "--smoke-test",
+        "--validate",
+        "--clean",
+        "--scenario",
+        "0",
+        "--view",
+        "1",
+        "--light",
+        "1",
+        "--quality",
+        "48",
+        "--frames",
+        "150",
+        "--output",
+        "build/publication/verification/effects-accepted-opposite",
+        "--max-speed",
+        "12",
+        "--capture-every",
+        "0"
+      ],
+      "source": {
+        "engine": {
+          "commit": "cec2f70f78591be2a57f5d6b186c16fc07634e59",
+          "tree_sha256": "a05325b508552eb19f2ce591aa2a2bf88edc331073655a0344860cf05ab28d23"
+        },
+        "games": {
+          "commit": "6f856c9c4e6842ee153f474237d5b2b979761ba8",
+          "tree_sha256": "ad678bb36ec1c4c6f91a1ab2f46beb34916a366a383e672d28e19f33b33d1094"
+        }
+      },
+      "gpu": "NVIDIA GeForce RTX 3080, 617.42, 10240 MiB",
+      "exit": 0,
+      "source_unchanged": true,
+      "warm_frames_30_onward": {
+        "sim_ms": {
+          "mean": 24.468463333333332,
+          "p95": 26.1689,
+          "maximum": 26.735
+        },
+        "light_ms": {
+          "mean": 0.4059903166666667,
+          "p95": 1.04448,
+          "maximum": 1.44896
+        },
+        "ray_ms": {
+          "mean": 0.7238059,
+          "p95": 1.10694,
+          "maximum": 1.37421
+        },
+        "debt": {
+          "mean": 0.0012430499083333334,
+          "p95": 0.00249999,
+          "maximum": 0.0025
+        },
+        "bytes": {
+          "mean": 87535936.0,
+          "p95": 87535936.0,
+          "maximum": 87535936.0
+        },
+        "velocity_clamps": {
+          "mean": 0.0,
+          "p95": 0.0,
+          "maximum": 0.0
+        },
+        "divergence": {
+          "mean": 0.049689463333333336,
+          "p95": 0.0888906,
+          "maximum": 0.14175
+        },
+        "max_speed": {
+          "mean": 7.876582583333334,
+          "p95": 9.57764,
+          "maximum": 9.77149
+        }
+      },
+      "final_summary": {
+        "requested_seconds": "2.5",
+        "simulated_seconds": "2.49958",
+        "fuel_kg": "0.0847209",
+        "soot_kg": "0.00524035",
+        "burned_kg": "0.095279",
+        "max_kelvin": "380.327",
+        "clamps": "0",
+        "max_speed": "6.82765"
+      }
+    },
+    {
+      "name": "effects-accepted-wall",
+      "argv": [
+        "--smoke-test",
+        "--validate",
+        "--clean",
+        "--scenario",
+        "1",
+        "--view",
+        "0",
+        "--light",
+        "0",
+        "--quality",
+        "48",
+        "--frames",
+        "240",
+        "--output",
+        "build/publication/verification/effects-accepted-wall",
+        "--max-speed",
+        "12",
+        "--capture-every",
+        "0"
+      ],
+      "source": {
+        "engine": {
+          "commit": "cec2f70f78591be2a57f5d6b186c16fc07634e59",
+          "tree_sha256": "a05325b508552eb19f2ce591aa2a2bf88edc331073655a0344860cf05ab28d23"
+        },
+        "games": {
+          "commit": "6f856c9c4e6842ee153f474237d5b2b979761ba8",
+          "tree_sha256": "ad678bb36ec1c4c6f91a1ab2f46beb34916a366a383e672d28e19f33b33d1094"
+        }
+      },
+      "gpu": "NVIDIA GeForce RTX 3080, 617.42, 10240 MiB",
+      "exit": 0,
+      "source_unchanged": true,
+      "warm_frames_30_onward": {
+        "sim_ms": {
+          "mean": 28.67839238095238,
+          "p95": 31.1155,
+          "maximum": 32.2776
+        },
+        "light_ms": {
+          "mean": 0.23235046666666667,
+          "p95": 0.748544,
+          "maximum": 1.25235
+        },
+        "ray_ms": {
+          "mean": 0.7606614,
+          "p95": 1.08237,
+          "maximum": 1.41722
+        },
+        "debt": {
+          "mean": 0.0012499917095238095,
+          "p95": 0.00249999,
+          "maximum": 0.0025
+        },
+        "bytes": {
+          "mean": 87535936.0,
+          "p95": 87535936.0,
+          "maximum": 87535936.0
+        },
+        "velocity_clamps": {
+          "mean": 0.0,
+          "p95": 0.0,
+          "maximum": 0.0
+        },
+        "divergence": {
+          "mean": 0.032004540476190474,
+          "p95": 0.0967766,
+          "maximum": 0.128224
+        },
+        "max_speed": {
+          "mean": 5.707818095238095,
+          "p95": 8.80854,
+          "maximum": 9.35758
+        }
+      },
+      "final_summary": {
+        "requested_seconds": "4",
+        "simulated_seconds": "3.99875",
+        "fuel_kg": "0.0825744",
+        "soot_kg": "0.0053584",
+        "burned_kg": "0.0974255",
+        "max_kelvin": "321.03",
+        "clamps": "0",
+        "max_speed": "3.59492"
+      }
+    },
+    {
+      "name": "effects-accepted-wind",
+      "argv": [
+        "--smoke-test",
+        "--validate",
+        "--clean",
+        "--scenario",
+        "3",
+        "--view",
+        "0",
+        "--light",
+        "0",
+        "--quality",
+        "48",
+        "--frames",
+        "240",
+        "--output",
+        "build/publication/verification/effects-accepted-wind",
+        "--max-speed",
+        "12",
+        "--capture-every",
+        "0"
+      ],
+      "source": {
+        "engine": {
+          "commit": "cec2f70f78591be2a57f5d6b186c16fc07634e59",
+          "tree_sha256": "a05325b508552eb19f2ce591aa2a2bf88edc331073655a0344860cf05ab28d23"
+        },
+        "games": {
+          "commit": "6f856c9c4e6842ee153f474237d5b2b979761ba8",
+          "tree_sha256": "ad678bb36ec1c4c6f91a1ab2f46beb34916a366a383e672d28e19f33b33d1094"
+        }
+      },
+      "gpu": "NVIDIA GeForce RTX 3080, 617.42, 10240 MiB",
+      "exit": 0,
+      "source_unchanged": true,
+      "warm_frames_30_onward": {
+        "sim_ms": {
+          "mean": 47.86393857142857,
+          "p95": 54.6854,
+          "maximum": 69.6817
+        },
+        "light_ms": {
+          "mean": 0.46633451428571426,
+          "p95": 1.58515,
+          "maximum": 2.72282
+        },
+        "ray_ms": {
+          "mean": 0.7701942571428572,
+          "p95": 1.64454,
+          "maximum": 2.06336
+        },
+        "debt": {
+          "mean": 0.0012499917095238095,
+          "p95": 0.00249999,
+          "maximum": 0.0025
+        },
+        "bytes": {
+          "mean": 116084224.0,
+          "p95": 116084224.0,
+          "maximum": 116084224.0
+        },
+        "velocity_clamps": {
+          "mean": 0.0,
+          "p95": 0.0,
+          "maximum": 0.0
+        },
+        "divergence": {
+          "mean": 0.027333937619047618,
+          "p95": 0.0705383,
+          "maximum": 0.0969332
+        },
+        "max_speed": {
+          "mean": 6.012449571428571,
+          "p95": 8.04218,
+          "maximum": 8.22902
+        }
+      },
+      "final_summary": {
+        "requested_seconds": "4",
+        "simulated_seconds": "3.99875",
+        "fuel_kg": "0.0947379",
+        "soot_kg": "0.00468941",
+        "burned_kg": "0.085262",
+        "max_kelvin": "322.777",
+        "clamps": "0",
+        "max_speed": "5.11362"
+      }
+    },
+    {
+      "name": "effects-accepted-zero",
+      "argv": [
+        "--smoke-test",
+        "--validate",
+        "--clean",
+        "--scenario",
+        "5",
+        "--view",
+        "0",
+        "--light",
+        "0",
+        "--quality",
+        "48",
+        "--frames",
+        "240",
+        "--output",
+        "build/publication/verification/effects-accepted-zero",
+        "--max-speed",
+        "12",
+        "--capture-every",
+        "0"
+      ],
+      "source": {
+        "engine": {
+          "commit": "cec2f70f78591be2a57f5d6b186c16fc07634e59",
+          "tree_sha256": "a05325b508552eb19f2ce591aa2a2bf88edc331073655a0344860cf05ab28d23"
+        },
+        "games": {
+          "commit": "6f856c9c4e6842ee153f474237d5b2b979761ba8",
+          "tree_sha256": "ad678bb36ec1c4c6f91a1ab2f46beb34916a366a383e672d28e19f33b33d1094"
+        }
+      },
+      "gpu": "NVIDIA GeForce RTX 3080, 617.42, 10240 MiB",
+      "exit": 0,
+      "source_unchanged": true,
+      "warm_frames_30_onward": {
+        "sim_ms": {
+          "mean": 25.260660952380952,
+          "p95": 27.7389,
+          "maximum": 28.5325
+        },
+        "light_ms": {
+          "mean": 0.3757103619047619,
+          "p95": 1.04346,
+          "maximum": 1.58208
+        },
+        "ray_ms": {
+          "mean": 0.7365730380952381,
+          "p95": 1.25133,
+          "maximum": 1.66502
+        },
+        "debt": {
+          "mean": 0.0012499917095238095,
+          "p95": 0.00249999,
+          "maximum": 0.0025
+        },
+        "bytes": {
+          "mean": 87535936.0,
+          "p95": 87535936.0,
+          "maximum": 87535936.0
+        },
+        "velocity_clamps": {
+          "mean": 0.0,
+          "p95": 0.0,
+          "maximum": 0.0
+        },
+        "divergence": {
+          "mean": 0.02415015204761905,
+          "p95": 0.114674,
+          "maximum": 0.232865
+        },
+        "max_speed": {
+          "mean": 1.3436670952380951,
+          "p95": 1.72674,
+          "maximum": 2.46825
+        }
+      },
+      "final_summary": {
+        "requested_seconds": "4",
+        "simulated_seconds": "3.99875",
+        "fuel_kg": "0.0967955",
+        "soot_kg": "0.00457624",
+        "burned_kg": "0.0832044",
+        "max_kelvin": "347.454",
+        "clamps": "0",
+        "max_speed": "1.20232"
+      }
+    }
+  ]
+}

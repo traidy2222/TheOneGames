@@ -15,6 +15,9 @@ cd ../TheOneGames
 [engine ownership review](https://github.com/traidy2222/TheOne/blob/main/docs/ENGINE_GAME_BOUNDARY_REVIEW.md)
 explains what was promoted into the engine and what stays here.
 
+[Reactive smoke/fire validation](docs/EFFECTS_VALIDATION.md) records the effects
+lab's actual captures, numerical checks, measured costs and current fidelity limits.
+
 Independent game projects consuming the external **TheOne** engine. This repository owns game executables, gameplay, game UI, assets, content conversion, saves and game tests. The engine checkout has no dependency on this repository.
 
 ```powershell
