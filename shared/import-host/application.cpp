@@ -1,7 +1,7 @@
 #include "frame_boundary.hpp"
 #include "application.hpp"
 #include "visible_profile.hpp"
-#include "editor_history.hpp"
+#include <theone/scene/editor_history.hpp>
 #include <theone/scene/picking.hpp>
 #include "background_loading.hpp"
 #include "scene_handoff.hpp"
@@ -32,7 +32,7 @@ struct Session {
     one::DoubleJump doubleJump;
     std::string robotAnimation;
     float robotAnimationTime=0;
-    EditorHistory edits;
+    one::EditorHistory edits;
     bool gesture=false,gestureResume=false,gestureCancelledCollision=false;
     size_t collisionRequests=0;
     std::vector<std::string> log;
@@ -73,7 +73,7 @@ struct Session {
         simulate=false;loading.collision.cancel();
     }
     void retireHistory() {
-        auto old=std::make_shared<EditorHistory>(std::move(edits));edits=EditorHistory{};
+        auto old=std::make_shared<one::EditorHistory>(std::move(edits));edits=one::EditorHistory{};
         gesture=false;loading.scene.retire(std::move(old));
     }
     void rebuildImmediate() { physics->rebuild(world); auto s=services(); game->start(s); accumulator=0; }

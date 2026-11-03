@@ -1,5 +1,6 @@
 #include "scene_handoff.hpp"
-#include "scene_asset_reuse.hpp"
+#include <theone/physics/scene_reuse.hpp>
+#include <cstdlib>
 #include <chrono>
 #include <imgui.h>
 #include <unordered_set>
@@ -15,7 +16,7 @@ void SceneHandoff::apply(one::PhysicsScene& ready, one::World& world, std::uniqu
     stats = {};
     auto total = Clock::now();
     auto start = total;
-    auto reused=reuseSceneAssets(ready,world);
+    auto reused=one::reuseSceneAssets(ready,world,std::getenv("THEONE_REFERENCE_SCENE_RELOAD")==nullptr);
     stats.modelsReused=reused.reused;stats.modelsReplaced=reused.replaced;
     renderer.invalidateAssets(reused.obsolete);
     stats.invalidateMs = elapsed(start);
