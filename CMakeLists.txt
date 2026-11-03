@@ -124,3 +124,4 @@ add_subdirectory(games/transformers)
 add_subdirectory(games/tornado)
 
 add_subdirectory(games/effects-lab)
+add_subdirectory(games/stellar-sandbox)
